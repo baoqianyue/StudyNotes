@@ -23,4 +23,4 @@ github是目前世界上热门的项目托管网站，有很多知名的项目�
 
 
 ## git merge 和 pull request   
-当B使用git fetch在远程仓库抽取了本地没有的代码后，就使用git merge合并一下分支，如果没有发生合并冲突，那老哥B就能在github上向A发送pull request申请项目合并，老哥A可以看到B修改的具体内容，然后同意项目合并，这样老哥B就正式成为项目的contributer了。  
+当B使用git fetch在远程仓库抽取了本地没有的代码后，就使用git merge合并一下分支，如果没有发生合并冲突，那老哥B就能在github上向A发送pull request申请项目合并，老哥A可以看到B修改的具体内容，然后同意项目合并，B会收到github的邮件通知。这样老哥B就正式成为项目的contributer了。
