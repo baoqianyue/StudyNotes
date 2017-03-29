@@ -118,8 +118,35 @@ void dellist(linklist head)
 			p = head;
 		}
 	} 
-
-
+	
+//反转链表     
+//主要思路是将原来链表中各结点指针域反向，将原来表中最后一个结点作为新链表的头节点  
+linklist reverse(linklist head)
+	{
+		//先判空 
+		if(head == NULL || head -> next == NULL){
+			return head;
+		} 
+		//创建三个辅助指针
+		//pre指向前一个结点，now指向当前结点，next指向下一个结点
+		linklist pre,now,next;
+		//初始化指针
+		pre = head;
+		now = head -> next;
+		pre -> next = NULL;
+		//开始反转
+		while(now){
+			//先用next保存下一个结点
+			next = now -> next;
+			//将当前结点的指针方向反转
+			now -> next = pre;
+			//移动now,pre保持循环
+			pre = now;
+			now = next;
+		} 
+		head = pre;
+		return head; 
+	} 
 
 
 
@@ -129,6 +156,9 @@ int main()
 	datatype x;
 	linklist head;
 	head = creatbyqueue();//测试尾插法创建链表 
+	print(head);
+	reverse(head);
+	printf("反转后的链表是\n");
 	print(head);
 	printf("请输入要删除的结点是：");
 	scanf("%d",&x);

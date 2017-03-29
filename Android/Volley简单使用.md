@@ -38,4 +38,26 @@ compile 'com.android.volley:volley:1.0.0'
 
 ## JsonRequest      
 * 1 简单介绍    
-类似于StringRequest的用法，JsonRequest也是继承自Request类的，不过因为JsonRequest是个抽象类，所以不能直接创建它的实例，只能从它的子类入手，JsonRequest有两个直接子类，JsonObjectRequest和JsonArrayRequest,前者用来请求一段JSON数据，后者用来请求一段JSON数组       
+类似于StringRequest的用法，JsonRequest也是继承自Request类的，不过因为JsonRequest是个抽象类，所以不能直接创建它的实例，只能从它的子类入手，JsonRequest有两个直接子类，JsonObjectRequest和JsonArrayRequest,前者用来请求一段JSON数据，后者用来请求一段JSON数组   
+
+* 2 使用  
+ * 新建一个JsonObjectRequest,构造方法基本与StringRequest一样    
+ ```java
+ JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("url", null,
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d(TAG, response.toString());
+                }
+            }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            Log.e(TAG, error.getMessage(), error);
+        }
+    });
+ ```     
+ 这里的第一个参数是一个url地址，响应的数据是以JSON格式返回的，然后我们可以在onResponse()方法接收到数据     
+ * 将新建的JsonObjectRequest对象添加到RequestQueue中就可以了     
+ ```java
+ mQueue.add(JsonObjectRequest);
+ ```
