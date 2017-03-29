@@ -3,9 +3,9 @@
 ## 托管方式    
 * 在Activity视图中可用FrameLayout预留出Fragment视图插入的位置，如果有多个fragment要插入，activity可以提供多个位置     
 * 具体的两种托管方式   
- * 在activity*布局*中添加fragment
- * 在activity*代码*中添加fragment      
- 常用第二种方式，足够灵活，也是唯一可以在运行时控制fragment的方式，我们可以自行决定何时添加fragment以及随后可以完成何种特殊任务，也可以移除fragment,用其他fragment代替当前fragment,然后重新添加已移除的fragment        
+  * 在activity*布局*中添加fragment
+  * 在activity*代码*中添加fragment      
+  常用第二种方式，足够灵活，也是唯一可以在运行时控制fragment的方式，我们可以自行决定何时添加fragment以及随后可以完成何种特殊任务，也可以移除  fragment,用其他fragment代替当前fragment,然后重新添加已移除的fragment        
 
 
 ## 具体例子
@@ -37,8 +37,8 @@ fragment_crime.xml
 </LinearLayout>
 ```   
 * 3 创建一个具体的Fragment类从而将布局中的控件读取出来    
- * 首先让该类继承自Fragment   
- * 实现fragment生命周期方法```onCreate(Bundle)```,```onCreateView(...)```   
+  * 首先让该类继承自Fragment   
+  * 实现fragment生命周期方法```onCreate(Bundle)```,```onCreateView(...)```   
   这里分析一下后者   
   ```java
   public void onCreateView(LayoutInflater inflater,ViewGroup container,
@@ -73,7 +73,7 @@ fragment_crime.xml
   ```   
 
 * 4 使用FragmentManager将fragment添加到activity中   
- * 获取FragmentManager   
+  * 获取FragmentManager   
   ```java
   public class CrimeActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ fragment_crime.xml
     }
   }
   ```      
- * 使用fragment事务将fragment队列中的fragment添加      
+  * 使用fragment事务将fragment队列中的fragment添加      
  ```java
  FragmentManager fm = getSupportFragmentManager();
  //将fragment队列引进来  
