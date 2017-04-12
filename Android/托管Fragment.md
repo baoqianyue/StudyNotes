@@ -5,7 +5,7 @@
 * 具体的两种托管方式   
   * 在activity*布局*中添加fragment
   * 在activity*代码*中添加fragment      
-  常用第二种方式，足够灵活，也是唯一可以在运行时控制fragment的方式，我们可以自行决定何时添加fragment以及随后可以完成何种特殊任务，也可以移除  fragment,用其他fragment代替当前fragment,然后重新添加已移除的fragment        
+  常用第二种方式，足够灵活，也是唯一可以在运行时控制fragment的方式，我们可以自行决定何时添加fragment以及随后可以完成何种特殊任务，也可以移除fragment,用其他fragment代替当前fragment,然后重新添加已移除的fragment        
 
 
 ## 具体例子
@@ -104,4 +104,59 @@ fragment_crime.xml
 这里我们还有一点判断逻辑，第一次将fragment队列使用findFragmentById()方法引进来的时候，先判断队列是否为空，如果为空就新创建一个fragment,再添加并提交，如果队列不为空，就将原来的fragment提交。
 
 ## 要善于使用fragment    
-AUF(Always Use Fragment)原则     
+AUF(Always Use Fragment)原则        
+
+## 抽象Activity类     
+如果应用的跳转层次很多时，我们就需要增加activity,如果还是使用托管fragment的方式，就需要重复写和上面一样的代码，所以将新建activity的固定代码封装成一个抽象类       
+* 1 创建一个Activity抽象类**SingleFragmentActivity**，并继承自AppCompatActivity    
+
+
+```java
+public abstract class SingleFragmentActivity extends AppCompatActivity {
+
+}
+```    
+
+
+
+* 2 增加抽象方法```createFragment()```,SingleFragmentActivity的子类会实现该方法，来返回由activity托管的fragment实例     
+
+
+```java
+protected abstract Fragment createFragment();
+```   
+
+* 3 实现初始化方法      
+
+
+```java
+@Override
+public void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_fragment);
+
+  FragmentManager fm = getSupportFragmentManager();
+  Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+
+  if (fragment == null) {
+    fragment = createFragment();
+    fm.beginTransaction()
+    .add(R.id.fragment_container,fragment)
+    .commit();
+  }
+}
+```         
+
+* 4 使用这个抽象类         
+
+
+
+```java
+public class TestActivity extends SingleFragmentActivity {
+  @Override
+  protected Fragment createFragment(){
+    return new TestFragment();
+  }
+}
+```    
+这样就创建完成了，大大减少了代码输入量。     
