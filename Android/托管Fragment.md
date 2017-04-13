@@ -2,9 +2,11 @@
 有的时候因为跳转界面很复杂，或者用户界面需要在运行时进行重新组合，Activity本身并不具有这样的灵活性，我们可以使用Activity托管Fragment的方法来实现这种UI效果     
 ## 托管方式    
 * 在Activity视图中可用FrameLayout预留出Fragment视图插入的位置，如果有多个fragment要插入，activity可以提供多个位置     
-* 具体的两种托管方式   
-  * 在activity*布局*中添加fragment
-  * 在activity*代码*中添加fragment      
+
+* 具体的两种托管方式     
+
+   * 在activity*布局*中添加fragment
+   * 在activity*代码*中添加fragment      
   常用第二种方式，足够灵活，也是唯一可以在运行时控制fragment的方式，我们可以自行决定何时添加fragment以及随后可以完成何种特殊任务，也可以移除fragment,用其他fragment代替当前fragment,然后重新添加已移除的fragment        
 
 
