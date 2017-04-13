@@ -37,8 +37,9 @@ fragment_crime.xml
 </LinearLayout>
 ```   
 * 3 创建一个具体的Fragment类从而将布局中的控件读取出来    
-  * 首先让该类继承自Fragment   
-  * 实现fragment生命周期方法```onCreate(Bundle)```,```onCreateView(...)```   
+
+   * 首先让该类继承自Fragment   
+   * 实现fragment生命周期方法```onCreate(Bundle)```,```onCreateView(...)```   
   这里分析一下后者   
   ```java
   public void onCreateView(LayoutInflater inflater,ViewGroup container,
