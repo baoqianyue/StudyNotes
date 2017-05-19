@@ -40,3 +40,28 @@
 
 ## 2.缩放(scale)     
 有两个重要的方法       
+```java
+/**
+    * Preconcat the current matrix with the specified scale.
+    *
+    * @param sx The amount to scale in X
+    * @param sy The amount to scale in Y
+    */
+   public void scale(float sx, float sy) {
+       native_scale(mNativeCanvasWrapper, sx, sy);
+   }
+
+   /**
+    * Preconcat the current matrix with the specified scale.
+    *
+    * @param sx The amount to scale in X
+    * @param sy The amount to scale in Y
+    * @param px The x-coord for the pivot point (unchanged by the scale)
+    * @param py The y-coord for the pivot point (unchanged by the scale)
+    */
+   public final void scale(float sx, float sy, float px, float py) {
+       translate(px, py);
+       scale(sx, sy);
+       translate(-px, -py);
+   }
+```
