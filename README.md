@@ -1,5 +1,4 @@
 # StudyNotes
-学习笔记
 
 <dl>
    <dt>Categories</dt>
