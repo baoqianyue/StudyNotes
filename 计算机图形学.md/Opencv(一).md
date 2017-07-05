@@ -87,4 +87,81 @@ AddWeighted( const CvArr* src1, double alpha,  const CvArr* src2, double beta,  
 
 5. gamma，添加的常数项，用来进行微调         
 
-6. dst，输出图像          
+6. dst，输出图像                  
+
+
+* 点的表示: Point类          
+
+```c++
+Point point;
+point.x = 10;
+point.y = 10;
+//或者
+Point point = Point(10,10);
+```     
+
+Point和Point_<int>,Point2i等价，Point_<float>和Point2f等价        
+
+
+* 颜色的表示: Scalar类          
+
+```c++
+Scalar(x,y,z);
+```      
+
+Scalar()表示拥有4个元素的数组，主要用来传递像素值，如果一个像素值只有RGB三通道，我们只写三个参数即可     
+
+
+* 尺寸的表示: Size类            
+
+```c++
+Size(2,2);
+```         
+
+Size和Size_<int>,Size2i等价               
+
+* 图像存储类型标识符          
+对于二维多通道图像，在定义和存储的时候需要指定存储元素的数据类型以及每个矩阵点的通道数        
+```
+CV_[位数][带符号与否][类型前缀]C[通道数]     
+```
+
+CV_8UC3 表示使用8位的unsigned char型，每个像素由3个元素组成三通道           
+CV_64FC1 常用来图像计算处理              
+CV_8UC1 常用来显示图像          
+
+
+* 矩形的表示: Rect类            
+
+这个构造函数和Android自定义View的很相似       
+
+
+* 颜色空间转化: cvtColor()函数          
+
+函数原型          
+
+```c++
+void cvtColor(InputArray arc, OutputArray dst, int code, int dstCn = 0)
+```     
+
+第一个参数是输入图像，第二个是输出图像，第三个整形量为颜色空间转换的标识，第四个参数是转换后的通道数，如果该参数为0，就取源图像的通道数。            
+
+常用标识符：      
+```
+RGB <--> BGR
+CV_BGR2BGRA,CV_RGB2BGRA,CV_BGRA2RGBA...      
+
+RGB <--> Gray  
+CV_RGB2GRAY,CV_RGBA2GRAY,CV_GRAY2RGB,CV_GRAY2RGBA                
+
+```        
+
+* 图像划分: Range()函数          
+
+```c++
+Mat A = Mat::eye(10,10,CV_32S);
+//提取A的1到3列(不包含)   
+Mat B = A(Range::All(),Range(1,3));
+//提取B的5到9行(不包含)
+Mat C = B(Range(5,9),Range::All());         
+```
