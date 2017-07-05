@@ -11,7 +11,12 @@ cv::Mat img(320,640,cv::Scalar(100));
 
 这里Scalar()函数是设置图像的颜色的函数          
 
+<<<<<<< HEAD
 ***       
+=======
+***     
+
+>>>>>>> 8c16ee7ead822cdc65bfcf3609ec2998ca8f857f
 
 
 * 图像的载入：imread()函数       
