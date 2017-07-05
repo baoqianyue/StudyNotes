@@ -11,8 +11,7 @@ cv::Mat img(320,640,cv::Scalar(100));
 
 这里Scalar()函数是设置图像的颜色的函数          
 
-***-_
-
+***
 
 * 图像的载入：imread()函数       
 
@@ -32,7 +31,10 @@ Mat imread(const string& filename, int flag = 1);
 
   3. flag < 0 返回包含Alpha通道的加载图像          
 
-***-_
+***
+
+
+
 
 * 图像显示：imshow()函数        
 
@@ -47,13 +49,16 @@ void imshow(const string& winname, InputArray mat);
 
 此函数的显示窗口大小和图像的深度有关：       
 
-***-_
+***    
+
 
 * InputArray类型        
 
 大多数情况下，就当它是Mat就行了           
 
-***-_
+
+***
+
 
 * 创建窗口:namedWindow()函数      
 
@@ -72,9 +77,10 @@ namedWindow(const string& winname, int flags=WINDOW_AUTOSIZE);
 
 2. WINDOW_AUTOSIZE 窗口自适应调节，而且用户不能进行调节(默认参数)       
 
-3. WINDOW_OPENGL 窗口创建时支持OpenGL      
+3. WINDOW_OPENGL 窗口创建时支持OpenGL              
 
-***-_
+
+***
 
 
 * 图像叠加函数:addweighted()    
@@ -97,7 +103,7 @@ AddWeighted( const CvArr* src1, double alpha,  const CvArr* src2, double beta,  
 6. dst，输出图像                  
 
 
-***-_
+***
 
 
 * 点的表示: Point类          
@@ -112,9 +118,7 @@ Point point = Point(10,10);
 
 Point和Point_<int>,Point2i等价，Point_<float>和Point2f等价        
 
-
-
-***-_
+***
 
 
 * 颜色的表示: Scalar类          
@@ -125,9 +129,8 @@ Scalar(x,y,z);
 
 Scalar()表示拥有4个元素的数组，主要用来传递像素值，如果一个像素值只有RGB三通道，我们只写三个参数即可     
 
+***
 
-
-***-_
 
 
 * 尺寸的表示: Size类            
@@ -139,8 +142,7 @@ Size(2,2);
 Size和Size_<int>,Size2i等价               
 
 
-
-***-_
+***
 
 
 * 图像存储类型标识符          
@@ -153,8 +155,8 @@ CV_8UC3 表示使用8位的unsigned char型，每个像素由3个元素组成三
 CV_64FC1 常用来图像计算处理              
 CV_8UC1 常用来显示图像          
 
+***
 
-***-_
 
 
 * 矩形的表示: Rect类            
@@ -162,8 +164,8 @@ CV_8UC1 常用来显示图像
 这个构造函数和Android自定义View的很相似       
 
 
+***
 
-***-_
 
 
 * 颜色空间转化: cvtColor()函数          
@@ -182,11 +184,12 @@ RGB <--> BGR
 CV_BGR2BGRA,CV_RGB2BGRA,CV_BGRA2RGBA...      
 
 RGB <--> Gray  
-CV_RGB2GRAY,CV_RGBA2GRAY,CV_GRAY2RGB,CV_GRAY2RGBA              
-```        
+CV_RGB2GRAY,CV_RGBA2GRAY,CV_GRAY2RGB,CV_GRAY2RGBA                
 
+```
 
-***-_
+***
+
 
 
 * 图像划分: Range()函数          
@@ -200,34 +203,27 @@ Mat C = B(Range(5,9),Range::All());
 ```      
 
 
-***-_
+***
 
 
-* 产生随机数: RNG()  
+* 产生随机数: RNG()           
 
 
-***-_
-
-
-***-_
+***
 
 
 
 
 
 
-***-_
 
-
-
-
-
-
-***-_
-
-
-
-
-
-
-***-_
+***
+***
+***
+***
+***
+***
+***
+***
+***
+***
