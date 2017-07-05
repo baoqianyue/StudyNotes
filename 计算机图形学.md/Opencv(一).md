@@ -11,7 +11,8 @@ cv::Mat img(320,640,cv::Scalar(100));
 
 这里Scalar()函数是设置图像的颜色的函数          
 
-***
+***       
+
 
 * 图像的载入：imread()函数       
 
@@ -31,7 +32,7 @@ Mat imread(const string& filename, int flag = 1);
 
   3. flag < 0 返回包含Alpha通道的加载图像          
 
-***
+***        
 
 
 
