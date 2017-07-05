@@ -68,4 +68,23 @@ namedWindow(const string& winname, int flags=WINDOW_AUTOSIZE);
 
 2. WINDOW_AUTOSIZE 窗口自适应调节，而且用户不能进行调节(默认参数)       
 
-3. WINDOW_OPENGL 窗口创建时支持OpenGL             
+3. WINDOW_OPENGL 窗口创建时支持OpenGL              
+
+* 图像叠加函数:addweighted()    
+
+函数原型       
+
+```c++
+AddWeighted( const CvArr* src1, double alpha,  const CvArr* src2, double beta,  double gamma, CvArr* dst );
+```     
+1. src1，第一个图像，可以是Mat        
+
+2. alpha，第一个图像占的权值        
+
+3. src2，第二个图像        
+
+4. beta，第二个图像占的权值           
+
+5. gamma，添加的常数项，用来进行微调         
+
+6. dst，输出图像          
