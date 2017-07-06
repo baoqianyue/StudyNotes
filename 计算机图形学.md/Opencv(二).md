@@ -1,3 +1,37 @@
+* 读取像素     
+
+
+1. 通过指针访问          
+这种方法最快     
+
+举个例子            
+```
+Mat image = imread(文件名);
+//行数
+int row = image.rows;
+//列数(本来的列数x图像通道数)    
+int col = image.cols * image.channels();
+
+//遍历所有像素
+for(int i = 0; i < row; i++)
+{
+  //获取每一行像素的首地址     
+  uchar* data = image.ptr<uchar>(i);
+
+  for(int j = 0; j < col; j++)
+  {
+    //读取每个像素值
+    cout << data[j] << endl;
+  }
+}
+```        
+
+Mat类提供了ptr函数可以得到图像任意行的首地址。             
+
+
+***    
+
+
 * 尺寸调整: resize()函数          
 
 函数原型    
