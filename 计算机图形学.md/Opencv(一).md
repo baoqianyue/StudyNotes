@@ -54,7 +54,7 @@ void imshow(const string& winname, InputArray mat);
 ***    
 
 
-* InputArray类型        
+* InputArray(OutputArray)类型        
 
 大多数情况下，就当它是Mat就行了           
 
@@ -147,7 +147,9 @@ Size和Size_<int>,Size2i等价
 ***
 
 
-* 图像存储类型标识符          
+* 图像存储类型标识符        
+
+
 对于二维多通道图像，在定义和存储的时候需要指定存储元素的数据类型以及每个矩阵点的通道数        
 ```
 CV_[位数][带符号与否][类型前缀]C[通道数]     
@@ -204,8 +206,25 @@ Mat B = A(Range::All(),Range(1,3));
 Mat C = B(Range(5,9),Range::All());         
 ```      
 
+***      
+
+* 绘制圆: circle()函数           
+
+```c++
+circle(img,
+      center,
+      banjin,
+      Scalar(0,255,255),
+      thickness,
+      lineType);
+```   
+
+第一个参数就是画圈区域，第二个参数就是圆心位置，第三个参数就是半径，第四个参数就是颜色，第五个参数就是线粗，第六个参数就是绘图模式    
+
+
 
 ***
+
 
 
 * 产生随机数: RNG()           
