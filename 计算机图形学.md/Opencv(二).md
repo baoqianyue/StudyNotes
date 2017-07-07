@@ -1,7 +1,7 @@
-* 读取像素     
+## 读取像素     
 
 
-1. 通过指针访问          
+### 通过指针访问          
 这种方法最快     
 
 举个例子            
@@ -32,7 +32,7 @@ Mat类提供了ptr函数可以得到图像任意行的首地址。
 ***    
 
 
-* 尺寸调整: resize()函数          
+## 尺寸调整: resize()函数          
 
 函数原型    
 ```c++
@@ -87,4 +87,34 @@ INTER_CUBIC 三次样条插值
 
 INTER_LANCZOS4 Lanczos插值
 
-使用8×8像素邻域的Lanczos插值
+使用8×8像素邻域的Lanczos插值  
+
+
+***
+
+## 绘制关键点: drawKeypoints()函数           
+
+函数原型       
+
+```c++
+void drawKeypoints(const Mat& image, const vector<KeyPoint>& keypoints, Mat& outImage,
+const Scalar& color=Scalar::all(-1), int flags = DrawMatchesFlags::DEFAULT)     
+```     
+
+第一个参数为输入图像，第二个参数为根据原图得到特征点，第三个参数为输出图像，它取决于第五个参数的取值，第四个参数为关键点的颜色，
+有默认值Scalar::all(-1),第五个参数为绘制关键点的特征标识符，有默认值          
+
+
+## 专为特征点检测的点: KeyPoint类     
+
+```c++
+class KeyPoint
+{
+  Point2f pt;//坐标
+  float size;//特征点领域直径
+  float angle;//特征点的方向
+  float response;
+  int octave;//特征点所在的图像金字塔的组
+  in class_id;//用于聚类的id
+}
+```    
