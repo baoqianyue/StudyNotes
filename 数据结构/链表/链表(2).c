@@ -1,4 +1,4 @@
-//以下均是对带头结点的单链表的各项操作 
+//浠ヤ笅鍧囨槸瀵瑰甫澶寸粨鐐圭殑鍗曢摼琛ㄧ殑鍚勯」鎿嶄綔 
 #include <stdio.h>  
 #include <stdlib.h>
 typedef int datatype;
@@ -6,10 +6,4 @@ typedef struct link_node{
 	datatype info;
 	struct link_node *next;
 }node;
-
-//创建链表
-void creat()
-{
-		
-} 
 
