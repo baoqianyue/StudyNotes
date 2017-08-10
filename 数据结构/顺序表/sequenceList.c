@@ -1,4 +1,4 @@
-//一下为顺序表的各项操作
+//以下为顺序表的各项操作
 #include <stdio.h>
 #include <stdlib.h>
 #define MAXSIZE 100
