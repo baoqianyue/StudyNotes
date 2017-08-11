@@ -1,4 +1,4 @@
-//ÒÔÏÂÎª²»´øÍ·½áµãµÄµ¥ÏòÁ´±íµÄ¸÷Ïî²Ù×÷ 
+//ä»¥ä¸‹ä¸ºä¸å¸¦å¤´ç»“ç‚¹çš„å•å‘é“¾è¡¨çš„å„é¡¹æ“ä½œ 
 #include <stdio.h>
 #include <stdlib.h>
 typedef int datatype;
@@ -7,12 +7,12 @@ typedef struct link_node{
 	struct link_node *next;
 }node;
 typedef node *linklist;
-//Í·²å·¨´´½¨Á´±í
+//å¤´æ’æ³•åˆ›å»ºé“¾è¡¨
 linklist creatbystack()
 	{
 		linklist head,s;
 		datatype x;
-		printf("ÇëÊäÈëÈô¸ÉÕûÊıĞòÁĞ²¢ÒÔ0½áÎ²\n");
+		printf("è¯·è¾“å…¥è‹¥å¹²æ•´æ•°åºåˆ—å¹¶ä»¥0ç»“å°¾\n");
 		scanf("%d",&x);
 		while(x != 0)
 		{
@@ -25,40 +25,40 @@ linklist creatbystack()
 	return head; 
 	}
 
-//Î²²å·¨´´½¨Á´±í
+//å°¾æ’æ³•åˆ›å»ºé“¾è¡¨
 linklist creatbyqueue()
 	{
 		linklist head,r,s;
 		datatype x;
-		head = r = NULL;//´´½¨Ò»¸öÒ»Ö±Ö¸ÏòÎ²½áµãµÄÖ¸Õë 
-		printf("ÇëÊäÈëÈô¸ÉÕûÊıĞòÁĞ²¢ÒÔ0½áÊø\n");
+		head = r = NULL;//åˆ›å»ºä¸€ä¸ªä¸€ç›´æŒ‡å‘å°¾ç»“ç‚¹çš„æŒ‡é’ˆ 
+		printf("è¯·è¾“å…¥è‹¥å¹²æ•´æ•°åºåˆ—å¹¶ä»¥0ç»“æŸ\n");
 		scanf("%d",&x);
 		while(x != 0)
 		{
 			s = (linklist)malloc(sizeof(node));
 			s -> info = x;
-			//½«ĞÂ½áµã²åÈëµ½Á´±íºó¶Ë
+			//å°†æ–°ç»“ç‚¹æ’å…¥åˆ°é“¾è¡¨åç«¯
 			if(head == NULL)
 			{
 				head = s; 
 			}
 			else
 				r -> next = s;
-			r = s;//ÒÆ¶¯Î²Ö¸Õë 
+			r = s;//ç§»åŠ¨å°¾æŒ‡é’ˆ 
 			scanf("%d",&x);
 		}
 		if (r) 
-		r -> next = NULL;//×îºó½«Á´±íµÄ½áÎ²ÉèÖÃÎªNULL 
+		r -> next = NULL;//æœ€åå°†é“¾è¡¨çš„ç»“å°¾è®¾ç½®ä¸ºNULL 
 		return head;
 	}
 	
-//Êä³öÁ´±í
+//è¾“å‡ºé“¾è¡¨
 void print(linklist head)
 	{
 		linklist p;
 		int i = 0;
 		p = head;
-		printf("±íÖĞÓĞ£º\n");
+		printf("è¡¨ä¸­æœ‰ï¼š\n");
 		while(p)
 		{
 			printf("%d  ",p -> info);
@@ -71,76 +71,64 @@ void print(linklist head)
 		}
 		printf("\n");
 	}
-//É¾³ıÁ´±íÖĞµÄÄ³¸öÖµ
+//åˆ é™¤é“¾è¡¨ä¸­çš„æŸä¸ªå€¼
 linklist delx(linklist head,datatype x)
 	{
 		linklist p1,p2;
 		if(head == NULL)
 		{
-			printf("Á´±íÊÇ¿ÕµÄ\n");
+			printf("é“¾è¡¨æ˜¯ç©ºçš„\n");
 			return head;
 		}
 		p1 = head;
 		while(x != p1 -> info && p1 -> next != NULL)
-		//p1²»ÊÇÒªÕÒµÄ½áµã£¬¶øÇÒËüºóÃæ»¹ÓĞ½áµã 
+		//p1ä¸æ˜¯è¦æ‰¾çš„ç»“ç‚¹ï¼Œè€Œä¸”å®ƒåé¢è¿˜æœ‰ç»“ç‚¹ 
 		{ 
 			p2 = p1;
-			p1 = p1 -> next;//p1ºóÒÆÒ»¸öµ¥Î» 	
+			p1 = p1 -> next;//p1åç§»ä¸€ä¸ªå•ä½ 	
 		}
-		if(p1 -> info == x)//ÕÒµ½ÁË
+		if(p1 -> info == x)//æ‰¾åˆ°äº†
 		{
 			if(p1 == head)
 			{
 				head = p1 -> next;
-			}//Èç¹ûp1Ö¸ÏòÊ×½áµã£¬°ÑºóÒ»¸ö½áµãµØÖ·¸³¸øhead
+			}//å¦‚æœp1æŒ‡å‘é¦–ç»“ç‚¹ï¼ŒæŠŠåä¸€ä¸ªç»“ç‚¹åœ°å€èµ‹ç»™head
 			else
 			{
 				p2 -> next = p1 -> next;	
-			}//Èç¹û²»ÊÇÊ×½áµã£¬¾Í°ÑÏÂÒ»¸ö½áµãµØÖ·¸³¸øÇ°Ò»¸ö½áµãµØÖ·
+			}//å¦‚æœä¸æ˜¯é¦–ç»“ç‚¹ï¼Œå°±æŠŠä¸‹ä¸€ä¸ªç»“ç‚¹åœ°å€èµ‹ç»™å‰ä¸€ä¸ªç»“ç‚¹åœ°å€
 			free(p1); 
 		} 
 		else
 		{
-			printf("Ã»ÓĞÕÒµ½¸Ã½áµã\n");
+			printf("æ²¡æœ‰æ‰¾åˆ°è¯¥ç»“ç‚¹\n");
 		}
 		return head;
 		
 	}
-
-//ÊÍ·ÅÁ´±í
-void dellist(linklist head)
-	{
-		linklist p = head;
-		while(p)
-		{
-			head = p -> next;
-			free(p);
-			p = head;
-		}
-	} 
 	
-//·´×ªÁ´±í     
-//Ö÷ÒªË¼Â·ÊÇ½«Ô­À´Á´±íÖĞ¸÷½áµãÖ¸ÕëÓò·´Ïò£¬½«Ô­À´±íÖĞ×îºóÒ»¸ö½áµã×÷ÎªĞÂÁ´±íµÄÍ·½Úµã  
+//åè½¬é“¾è¡¨     
+//ä¸»è¦æ€è·¯æ˜¯å°†åŸæ¥é“¾è¡¨ä¸­å„ç»“ç‚¹æŒ‡é’ˆåŸŸåå‘ï¼Œå°†åŸæ¥è¡¨ä¸­æœ€åä¸€ä¸ªç»“ç‚¹ä½œä¸ºæ–°é“¾è¡¨çš„å¤´èŠ‚ç‚¹  
 linklist reverse(linklist head)
 	{
-		//ÏÈÅĞ¿Õ 
+		//å…ˆåˆ¤ç©º 
 		if(head == NULL || head -> next == NULL){
 			return head;
 		} 
-		//´´½¨Èı¸ö¸¨ÖúÖ¸Õë
-		//preÖ¸ÏòÇ°Ò»¸ö½áµã£¬nowÖ¸Ïòµ±Ç°½áµã£¬nextÖ¸ÏòÏÂÒ»¸ö½áµã
+		//åˆ›å»ºä¸‰ä¸ªè¾…åŠ©æŒ‡é’ˆ
+		//preæŒ‡å‘å‰ä¸€ä¸ªç»“ç‚¹ï¼ŒnowæŒ‡å‘å½“å‰ç»“ç‚¹ï¼ŒnextæŒ‡å‘ä¸‹ä¸€ä¸ªç»“ç‚¹
 		linklist pre,now,next;
-		//³õÊ¼»¯Ö¸Õë
+		//åˆå§‹åŒ–æŒ‡é’ˆ
 		pre = head;
 		now = head -> next;
 		pre -> next = NULL;
-		//¿ªÊ¼·´×ª
+		//å¼€å§‹åè½¬
 		while(now){
-			//ÏÈÓÃnext±£´æÏÂÒ»¸ö½áµã
+			//å…ˆç”¨nextä¿å­˜ä¸‹ä¸€ä¸ªç»“ç‚¹
 			next = now -> next;
-			//½«µ±Ç°½áµãµÄÖ¸Õë·½Ïò·´×ª
+			//å°†å½“å‰ç»“ç‚¹çš„æŒ‡é’ˆæ–¹å‘åè½¬
 			now -> next = pre;
-			//ÒÆ¶¯now,pre±£³ÖÑ­»·
+			//ç§»åŠ¨now,preä¿æŒå¾ªç¯
 			pre = now;
 			now = next;
 		} 
@@ -150,19 +138,19 @@ linklist reverse(linklist head)
 
 
 
-//²âÊÔ 
+//æµ‹è¯• 
 int main()
 {
 	datatype x;
 	linklist head;
-	head = creatbyqueue();//²âÊÔÎ²²å·¨´´½¨Á´±í 
+	head = creatbyqueue();//æµ‹è¯•å°¾æ’æ³•åˆ›å»ºé“¾è¡¨ 
 	print(head);
 	reverse(head);
-	printf("·´×ªºóµÄÁ´±íÊÇ\n");
+	printf("åè½¬åçš„é“¾è¡¨æ˜¯\n");
 	print(head);
-	printf("ÇëÊäÈëÒªÉ¾³ıµÄ½áµãÊÇ£º");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤çš„ç»“ç‚¹æ˜¯ï¼š");
 	scanf("%d",&x);
-	head = delx(head,x);//²âÊÔÉ¾³ı½áµã 
+	head = delx(head,x);//æµ‹è¯•åˆ é™¤ç»“ç‚¹ 
 	print(head);
 	dellist(head); 
 	return 0;
