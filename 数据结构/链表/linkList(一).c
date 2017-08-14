@@ -138,7 +138,7 @@ linklist delx(linklist head, datatype x)
 
 
 
-//将不带头结点的单链表倒置
+//将不带头结点的单链表倒置(返回头指针)
 linklist reverse1(linklist head)
 {
 	if(head == NULL || head -> next == NULL)
@@ -160,6 +160,73 @@ linklist reverse1(linklist head)
 	return head;
 }
 
+
+//将不带头结点的单链表倒置(返回值为空)
+void reverse2(linklist *head)
+{
+	if(*head == NULL || (*head) -> next == NULL)
+	{
+		printf("单链表为空\n");
+	}
+	linklist p,q;
+	p = NULL;
+	q = *head;
+	while(q)
+	{
+		*head = (*head) -> next;
+		q -> next = p;
+		p = q;
+		q = *head;
+	}
+	*head = p;
+}
+
+
+//假设不带头结点的单链表是升序排列的，设计算法函数，将值为x的结点插入到链表中，并保持链表的有序性
+linklist insert(linklist head, datatype x)
+{
+	linklist p,q;
+	if(head == NULL || head -> next == NULL)
+	{
+		printf("单链表为空\n");
+		return head;
+	}
+	for(q = head; q -> next != NULL; q = q -> next)
+	{
+		if((q -> next) -> info > x)
+		break;
+	}
+	p = (linklist) malloc(sizeof(node));
+	p -> info = x;
+	p -> next = q -> next;
+	q -> next = p;
+
+	return head;
+
+}
+
+
+//删除不带头结点单链表中值为x的所有结点
+linklist delallx(linklist head, datatype x)
+{
+	linklist p,q;
+	if(head == NULL || head -> next == NULL)
+	{
+		printf("单链表为空\n");
+		return head;
+	}
+
+	for(p = head; p -> next != NULL; p = p -> next)
+	{
+		if((p -> next) -> info == x)
+		{
+			q = p -> next;
+			p -> next = q -> next;
+			free(q);
+		}
+	}
+	return head;
+}
 
 //测试
 int main()
@@ -183,11 +250,34 @@ int main()
 //	p = delx(p,x);
 //	print(p);
 //  测试倒置函数
- 	linklist head;
- 	head = creatbystack();
- 	print(head);
- 	head = reverse1(head);
- 	print(head);
-
+// 	linklist head;
+// 	head = creatbystack();
+// 	print(head);
+// 	head = reverse1(head);
+// 	print(head);
+// 	reverse2(&head);
+// 	print(head);
+//	delList(head);
+//  测试有序插入函数
+//	datatype x;
+//	linklist head;
+//	printf("输入一组升序排列的整数:\n");
+//	head = creatbyqueue();
+//	print(head);
+//	printf("输入要插入的值\n");
+//	scanf("%d",&x);
+//	head = insert(head,x);
+//	print(head);
+//	delList(head);
+//  测试删除全部给定值函数
+    datatype x;
+	linklist head;
+	head = creatbyqueue();
+	print(head);
+	printf("输入要删除的值\n");
+	scanf("%d",&x);
+	head = delallx(head,x);
+	print(head);
+	delList(head);
 	return 0;
 }
