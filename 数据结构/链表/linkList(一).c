@@ -270,7 +270,7 @@ int main()
 //	print(head);
 //	delList(head);
 //  测试删除全部给定值函数
-    datatype x;
+    	datatype x;
 	linklist head;
 	head = creatbyqueue();
 	print(head);
