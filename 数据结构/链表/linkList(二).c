@@ -107,20 +107,18 @@ void reverse(linklist head)
 	{
 		printf("单链表为空\n");
 	}
-	linklist p,q,s;
+	linklist p,q;
 	p = head -> next;
-	q = p -> next;
-	while(q)
+	head -> next = NULL;
+	while(p)
 	{
-		s = q;
-		s -> next = head -> next;
-		head -> next = s;
-		s = p;
-		q = q -> next;
+		q = p;
+		p = p -> next;
+		//第一次循环时先让第一个结点成为尾结点
+		q -> next = head -> next;
+		head -> next = q;
 	}
-	p -> next = NULL;
 }
-
 
 
 
@@ -143,10 +141,18 @@ int main()
 //	delx(p,x);
 //	print(p);
 //  测试倒置函数
-//	linklist head,head1;
-//	head = creatbystack();
-//	print(head);
-//	reverse(head);
-//	print(head);
+	linklist head,head1;
+	head = creatbyqueue();
+	print(head);
+	reverse(head);
+	print(head);
 	return 0;
 }
+
+
+
+
+
+
+
+ 
