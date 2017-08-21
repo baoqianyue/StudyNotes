@@ -228,7 +228,7 @@ int main()
 //	print(&lc);
 //	return 0;
 //  测试调整函数
-  sequence_list L;
+  	sequence_list L;
 	input(&L);
 	print(&L);
 	partion(&L);
