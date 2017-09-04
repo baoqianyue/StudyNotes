@@ -42,7 +42,9 @@ s -> next = p -> next; p -> next = s;
 q = p -> next; p -> next = q -> next;
 ```          
 
-其实相当于       
+其实相当于            
+
+
 
 
 ```c
