@@ -82,3 +82,5 @@ int index(seqstring p, seqstring t)
 * 算法时间复杂度        
 
 该算法的时间复杂度为O(m * n),m为t串的长度，n为p串的长度。        
+
+Test
