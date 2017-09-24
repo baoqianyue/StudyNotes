@@ -5,7 +5,7 @@ Java Annotation were added to Java from Java5,as far as I know,Java annotation h
 ## Structure Diagram           
 
 ![](../../image/annotationstructure.png)           
-
+![](../../image/linklist1.png)
 
 
 ## Basic Knowledge            
