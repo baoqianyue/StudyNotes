@@ -237,9 +237,28 @@ public class Main {
 ```
 Father:true
 Son:true
-```                
+```             
 
-### 2.@SuppressWarnings         
+
+### 4.@Deprecated      
+
+* define      
+
+```java
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+public @interface Deprecated {
+}
+```
+
+* The function of @Deprecated        
+
+这个注解标注的内容表示已被弃用或不建议使用，一些IDE会在这些内容上面做出标志，而且该注解带有一定的延续性，当我们在代码中以继承或覆盖的方式使用到了这个被标注内容的子类或其他，虽然子类没有直接被@Deprecated标注，但IDE仍然会标注出这个元素不再被建议使用，编译器也会报出警告。     
+
+
+
+### 3.@SuppressWarnings         
 
 * define       
 
