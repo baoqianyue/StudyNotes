@@ -143,7 +143,8 @@ public @interface MyAnnotation {
 注意：当使用关键字@interface定义了一个注解后，该注解不能继承其他接口或注解。          
 
 
-5).该注解名定义为MyAnnotation,所以我们可以在代码中以"@MyAnnotation"的形式来使用这个注解。               
+5).该注解名定义为MyAnnotation,所以我们可以在代码中以"@MyAnnotation"的形式来使用这个注解。     
+x          
 
 
 ## Java Built-in Annotation
@@ -283,4 +284,4 @@ public @interface SuppressWarnings {
 
 
 
-## The role of Annotations           
+## The role of Annotations            
