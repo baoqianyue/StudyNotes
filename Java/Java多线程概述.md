@@ -173,9 +173,73 @@ Thread-2 课余量83
 Thread-1 课余量84
 Thread-2 课余量81
 Thread-0 课余量82
-```     
+```
+
+
 这次输出结果仍有省略，但是这次的选课是正常的，三个线程交替完成。         
 
 但是我们一般不定义静态，他的生命周期太长了，我们还要换种方法,就是使用Runnable接口实现。      
 
-* 
+* 使用Runnable接口的步骤        
+
+
+   * 1). 定义类实现Runnable接口    
+
+  * 2). 重写Runnable接口的run方法     
+
+  * 3). 通过Thread类建立线程对象    
+
+  * 4). 将Runnable接口的子类对象当作参数传递给Thread类构造函数     
+ 其实很好理解，我们可以把Runnable当作是具体的任务，当我们建立线程Thread后，就将任务Runnable传给它，这样线程就有事可干了，线程要运行的代码就保存在Runnable的```run()```中。        
+
+  * 5). 调用Thread类的```start()```方法开启线程并调用Runnable中的```run()```方法。     
+
+
+* 实现     
+
+```java
+public class Elective implements Runnable {
+
+    private int classes = 100;
+
+    @Override
+    public void run() {
+        while (true) {
+            if (classes > 0) {
+                System.out.println(Thread.currentThread().getName() + " 课余量" + classes--);
+            }
+        }
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        Elective elective = new Elective();
+        Thread thread1 = new Thread(elective);
+        Thread thread2 = new Thread(elective);
+        Thread thread3 = new Thread(elective);
+        thread1.start();
+        thread2.start();
+        thread3.start();
+    }
+}
+```    
+
+输出结果是正确的，这样实现的好处就是避免了单继承的局限性，让类的只有一个继承的限额去实现更重要的任务，在定义线程时建议采用这种方式。        
+
+再看一段源码：     
+
+```java
+public
+class Thread implements Runnable {
+    /* Make sure registerNatives is the first thing <clinit> does. */
+    private static native void registerNatives();
+    static {
+        registerNatives();
+    }
+```      
+
+可以看到Thread类也是实现了Runnable接口的。所以我们的第一种实现方式其实也是在使用第二种方式。       
+
+      
