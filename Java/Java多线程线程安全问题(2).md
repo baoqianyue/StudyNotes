@@ -230,4 +230,62 @@ public class Elective implements Runnable {
 
 输出正确，所以可以验证同步函数的锁就是本类对象this。          
 
-## 静态同步函数的锁      
+## 静态同步函数的锁         
+
+这个问题也应该注意，当我们把同步函数变为静态的，来检测一下静态同步函数的锁是不是还是this：     
+
+```java
+private static synchronized void work() {
+      if (classes > 0) {
+          try {
+              Thread.sleep(100);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+          System.out.println(Thread.currentThread() + " 同步函数课余量" + classes--);
+      }
+  }
+```     
+
+输出：    
+
+```
+Thread[Thread-1,5,main] 同步函数课余量10
+Thread[Thread-1,5,main] 同步函数课余量9
+Thread[Thread-0,5,main] 代码块课余量8
+Thread[Thread-0,5,main] 代码块课余量7
+Thread[Thread-1,5,main] 同步函数课余量6
+Thread[Thread-1,5,main] 同步函数课余量5
+Thread[Thread-0,5,main] 代码块课余量4
+Thread[Thread-0,5,main] 代码块课余量3
+Thread[Thread-1,5,main] 同步函数课余量2
+Thread[Thread-0,5,main] 代码块课余量1
+Thread[Thread-1,5,main] 同步函数课余量0
+```      
+
+可以看到，线程又不安全了，说明静态同步函数的锁发生了改变，其实很好理解，static修饰的成员是跟随着类的加载而加载的，此时的内存中还没有本类对象呢，但是有着类加载产生的该类的字节码文件，```类名.class```，这个就是静态函数的锁。我们把同步代码块的锁也改成这样再试一下：    
+
+```java
+public void run() {
+       if (flag) {
+           while (true) {
+               synchronized (Elective.class) {
+                   if (classes > 0) {
+                       try {
+                           Thread.sleep(100);
+                       } catch (InterruptedException e) {
+                           e.printStackTrace();
+                       }
+                       System.out.println(Thread.currentThread() + " 代码块课余量" + classes--);
+                   }
+               }
+           }
+       } else {
+           while (true) {
+               work();
+           }
+       }
+   }
+```        
+
+输出正确。        
