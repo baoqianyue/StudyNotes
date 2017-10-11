@@ -185,11 +185,141 @@ Thread-2 课余量1
 }
 
  ```     
- 结果就是错误的，所以这把锁必须固定，不然就是每个线程一把锁，同步就没了意义。            
+ 结果就是错误的，所以这把锁必须固定，不然就是每个线程一把锁，同步就没了意义。               
 
 
 * 同步代码块的弊端         
 这样的同步会使多个线程都要判断锁，较为耗费资源。        
 
 
-## 使用同步函数解决线程安全问题。        
+## 使用同步函数解决线程安全问题。           
+
+再来举一个例子，两个人合伙做生意，在银行开了一个账户，平时两个人都会往这个账户里面存钱，这也是一个多线程问题，我们先来实现一下：     
+
+```java
+package com.barackbao;
+
+public class SaveMoney implements Runnable {
+
+    Bank bank = new Bank();
+
+    @Override
+    public void run() {
+        //每次存100，存三次
+        for (int i = 0; i < 3; i++) {
+            bank.save(100);
+        }
+    }
+
+    class Bank {
+        private int num = 0;
+
+        public void save(int n) {
+            num += n;
+            System.out.println(Thread.currentThread() + "余额: " + num);
+        }
+    }
+}
+
+package com.barackbao;
+
+public class Main {
+
+    public static void main(String[] args) {
+        SaveMoney saveMoney = new SaveMoney();
+        Thread thread1 = new Thread(saveMoney);
+        Thread thread2 = new Thread(saveMoney);
+
+        thread1.start();
+        thread2.start();
+    }
+}
+
+```     
+
+输出：     
+
+```
+Thread[Thread-1,5,main]余额: 200
+Thread[Thread-0,5,main]余额: 300
+Thread[Thread-1,5,main]余额: 400
+Thread[Thread-0,5,main]余额: 500
+Thread[Thread-1,5,main]余额: 600
+```      
+
+看上去没什么毛病，我来加一点耗时操作就会出现问题了。      
+
+```java
+class Bank {
+        private int num = 0;
+
+        public void save(int n) {
+            num = num + n;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread() + "余额: " + num);
+        }
+    }
+```     
+
+输出：    
+
+```
+Thread[Thread-0,5,main]余额: 200
+Thread[Thread-1,5,main]余额: 200
+Thread[Thread-1,5,main]余额: 400
+Thread[Thread-0,5,main]余额: 400
+Thread[Thread-1,5,main]余额: 600
+Thread[Thread-0,5,main]余额: 600
+```     
+
+问题出现了，原因和上面那个例子一样，就是因为共享数据被非法操作了。        
+
+* 要考虑的问题        
+
+ * 1). 明确哪些代码是多线程运行代码     
+
+ * 2). 明确共享数据     
+
+ * 3). 明确多线程运行代码中哪些语句是操作共享数据的。          
+
+明确了这些我们就先来同步一下代码，使用同步代码块。       
+
+```java
+public class SaveMoney implements Runnable {
+
+    Bank bank = new Bank();
+
+    @Override
+    public void run() {
+        //每次存100，存三次
+        for (int i = 0; i < 3; i++) {
+            bank.save(100);
+        }
+    }
+
+    class Bank {
+        private int num = 0;
+        Object object = new Object();
+
+        public void save(int n) {
+            synchronized (object) {
+                num = num + n;
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread() + "余额: " + num);
+            }
+
+        }
+    }
+}
+
+```     
+
+输出正确。
