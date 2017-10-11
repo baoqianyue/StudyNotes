@@ -322,4 +322,43 @@ public class SaveMoney implements Runnable {
 
 ```     
 
-输出正确。
+输出正确。    
+
+线程同步的核心就是必须搞清楚哪些代码该同步，哪些不该同步。      
+
+下面用函数封装的思想来达到线程同步的目的：       
+
+```java
+public class SaveMoney implements Runnable {
+
+    Bank bank = new Bank();
+
+    @Override
+    public void run() {
+        //每次存100，存三次
+        for (int i = 0; i < 3; i++) {
+            bank.save(100);
+        }
+    }
+
+    class Bank {
+        private int num = 0;
+
+        public synchronized void save(int n) {
+            num = num + n;
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread() + "余额: " + num);
+
+        }
+    }
+}
+
+```     
+
+输出正确。     
+
+这就是同步函数的写法，就是给函数加一个修饰符```synchronized```,这样就给这个函数上了一把锁，达到同步的目的。   
