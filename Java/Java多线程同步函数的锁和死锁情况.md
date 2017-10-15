@@ -293,4 +293,84 @@ public void run() {
 
 ## 死锁的出现         
 
-test
+
+当同步嵌套同步时，就会出现死锁的情况。         
+
+```java
+public class Elective implements Runnable {
+
+    private int classes = 100;
+
+    public boolean flag = true;
+
+    public Object object = new Object();
+
+    @Override
+    public void run() {
+        if (flag) {
+            while (true) {
+                synchronized (object) {
+                    work();
+                }
+            }
+        } else {
+            while (true) {
+                work();
+            }
+        }
+    }
+
+    private synchronized void work() {
+        synchronized (object) {
+            if (classes > 0) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread() + " 同步函数课余量" + classes--);
+            }
+        }
+
+    }
+}
+
+public class Main {
+
+    public static void main(String[] args) {
+        Elective elective = new Elective();
+
+        Thread thread1 = new Thread(elective);
+        Thread thread2 = new Thread(elective);
+
+        thread1.start();
+        //为了防止只有第一个线程运行
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        elective.flag = false;
+
+        thread2.start();
+
+    }
+}
+
+```    
+
+输出：    
+
+```
+Thread[Thread-1,5,main] 同步函数课余量21
+Thread[Thread-1,5,main] 同步函数课余量20
+Thread[Thread-1,5,main] 同步函数课余量19
+Thread[Thread-1,5,main] 同步函数课余量18
+Thread[Thread-1,5,main] 同步函数课余量17
+```      
+
+代码运行到这就停止了。     
+
+
+
+这段代码中有两个锁，而且this锁中有object锁，object锁中有this锁，所以出现了死锁。        
