@@ -18,15 +18,15 @@ I/O即Input Output,输入输出。
 
 + 字节流的抽象基类       
 
- - InputStream        
+  - InputStream        
 
- - OutputStream      
+  - OutputStream      
 
 + 字符流的抽象基类    
 
- - Reader    
+  - Reader    
 
- - Writer      
+  - Writer      
 
 可以看到表里其他子类的后缀都是上面这几个基类。           
 
