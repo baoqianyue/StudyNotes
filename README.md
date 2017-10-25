@@ -7,6 +7,7 @@
    <dd><a href="#ComputerNetwork">计算机网络</a></dd>
    <dd><a href="#Algorithms">算法</a></dd>
    <dd><a href="#DesignPatterns">设计模式</a></dd>
+   <dd><a href="#计算机图形学">计算机图形学</a></dd>      
 
 
 </dl>
