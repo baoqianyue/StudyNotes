@@ -217,4 +217,135 @@ public static void main(String[] args) {
    }
 ```     
 
-可以输出文件中的内容，这段代码中出现了一个新的方法，`readLine()`。      
+可以输出文件中的内容，这段代码中出现了一个新的方法，`readLine()`。       
+
+### readLine()函数的工作原理       
+
+
+我们来看一下这个函数的源码和官方描述     
+
+```java
+/**
+   * Reads a line of text.  A line is considered to be terminated by any one
+   * of a line feed ('\n'), a carriage return ('\r'), or a carriage return
+   * followed immediately by a linefeed.
+   *
+   * @return     A String containing the contents of the line, not including
+   *             any line-termination characters, or null if the end of the
+   *             stream has been reached
+   *
+   * @exception  IOException  If an I/O error occurs
+   *
+   * @see java.nio.file.Files#readAllLines
+   */
+  public String readLine() throws IOException {
+      return readLine(false);
+  }
+```      
+
+注释里面介绍的很清楚，这个函数就是来一行一行的读取文本，而且返回值就是这一行文本的内容，不包含结束符。           
+
+其实这个方法在具体操作的时候还是一个字符一个字符的读取完成的，也就是最底层的实现是`read()`函数，只不过这个函数设置了一个数组，这个数组就是所谓的缓冲区，读取一个字符后先将字符存到这个数组里，当读到换行或者回车符等结束符时，才去把此时数组中的数据读取，这就是它的工作原理。     
+
+
+
+### 使用缓冲区来复制文件        
+
+我们直接上代码     
+
+```java
+public static void main(String[] args) {
+       BufferedReader bufferedReader = null;
+       BufferedWriter bufferedWriter = null;
+
+       try {
+           FileReader fileReader = new FileReader("test.txt");
+           FileWriter fileWriter = new FileWriter("D://test.txt");
+
+           bufferedReader = new BufferedReader(fileReader);
+           bufferedWriter = new BufferedWriter(fileWriter);
+
+           String line = null;
+           while ((line = bufferedReader.readLine()) != null) {
+               bufferedWriter.write(line);
+           }
+
+           bufferedWriter.flush();
+
+           bufferedReader.close();
+           bufferedWriter.close();
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+```      
+
+很简单。      
+
+
+
+###  自定义readLine()      
+
+```java
+public static void main(String[] args) {
+        /**
+         * 使用自定义的readLine()函数
+         */
+        //先创建流与文件相关联
+        try {
+            FileReader fileReader = new FileReader("test.txt");
+            CustomBufferedReader customBufferedReader = new CustomBufferedReader(fileReader);
+
+            String content = null;
+            while ((content = customBufferedReader.customReadLine()) != null) {
+                System.out.println(content);
+            }
+
+            customBufferedReader.customClose();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public class CustomBufferedReader {
+        private FileReader fileReader = null;
+
+        public CustomBufferedReader(FileReader fileReader) {
+            this.fileReader = fileReader;
+        }
+
+        public String customReadLine() throws IOException {
+            //定义临时容器
+            StringBuilder stringBuilder = new StringBuilder();
+            int ch = 0;
+            while ((ch = fileReader.read()) != -1) {
+                if (ch == '\n') {
+                    return stringBuilder.toString();
+                } else if (ch == '\r') {
+                    continue;
+                } else {
+                    stringBuilder.append((char) ch);
+                }
+            }
+
+            if (stringBuilder.length() != 0) {
+                return stringBuilder.toString();
+            }
+
+            return null;
+        }
+
+        public void customClose() throws IOException {
+            fileReader.close();
+        }
+    }
+
+```      
+
+这就是简单的自定义`readLine()`。      
