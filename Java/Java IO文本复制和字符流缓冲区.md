@@ -77,3 +77,144 @@ public static void main(String[] args) {
 ```        
 
 可以看到可以正确的复制文件。        
+
+
+## 字符流的缓冲区      
+
+前面基本已经介绍完了字符流的基本内容，现在我们来看一下字符流的缓冲区。      
+
+字符流缓冲区提高了字符读取和存储的效率，这个我们下面会写代码举例来验证。       
+
++ 字符流缓冲区的子类         
+
+    - BufferedWriter         
+
+    - BufferedReader        
+
+缓冲区要结合具体存在的流才能使用。     
+
+
+### BufferedWriter           
+
+使用字符流缓冲区，既然要使用缓冲区，所以我们首先要有一个字符流，前面说过缓冲区的出现就是为了提高一般字符流的工作效率，所以我们把要提高效率的字符流作为参数传递给字符流缓冲区的构造函数。       
+
+* 构造函数      
+
+```java
+BufferedWriter(Writer out);    
+BufferedWriter(Writer out, int sz);
+```          
+
+构造函数很简单，就是传入一个具体的流，还可以直接指定缓冲区的大小。      
+
+先看一个例子     
+
+```java
+public static void main(String[] args) {
+        try {
+            FileWriter fileWriter = new FileWriter("test.txt", true);
+            BufferedWriter bufWriter = new BufferedWriter(fileWriter);
+            //写入数据
+            bufWriter.write("HelloWorld");
+            //换行
+            bufWriter.newLine();
+            //刷新，用到了缓冲区就需要刷新才能将缓冲区内的内容写入到文件中
+            bufWriter.flush();
+            //这里关闭的
+            bufWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```     
+
+可以看到文件续写成功。       
+
+为了证明缓冲区进行了效率提高，我们来写一个程序来实际的确定一下。          
+
+```java
+public static void main(String[] args) {
+       testFileWriter();
+       testBufferedWriter();
+   }
+
+   //测试字符流
+   private static void testFileWriter() {
+       long begin = System.currentTimeMillis();
+       long over;
+       try {
+           FileWriter fileWriter = new FileWriter("test.txt");
+           fileWriter.write("ThePositiveThinkerSeesTheInvisibleFeelsTheIntangibleAndAchievesTheImpossible");
+           fileWriter.close();
+           over = System.currentTimeMillis();
+           System.out.println("字符流写入操作用时：" + (over - begin) + "ms");
+       } catch (IOException ex) {
+           ex.printStackTrace();
+       }
+   }
+
+   //测试字符流缓冲区
+   private static void testBufferedWriter() {
+       long begin = System.currentTimeMillis();
+       long over;
+       try {
+           FileWriter fileWriter = new FileWriter("test.txt");
+           BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+           bufferedWriter.write("ThePositiveThinkerSeesTheInvisibleFeelsTheIntangibleAndAchievesTheImpossible");
+           bufferedWriter.flush();
+           bufferedWriter.close();
+           over = System.currentTimeMillis();
+           System.out.println("字符流缓冲区写入操作用时：" + (over - begin) + "ms");
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+
+   }
+```     
+
+输出：    
+
+```
+字符流写入操作用时：11ms
+字符流缓冲区写入操作用时：2ms
+```      
+
+为了使对比明显，我故意写了很长一段内容进去，可以看到缓冲区的完成速度要字符流快很多。        
+
+在缓冲区中封装了一个数组，存入数据后一次取出。           
+
+### BufferedReader     
+
+* 构造函数    
+
+```java
+BufferedReader(Reader in);
+BufferedReader(Reader in, int size);
+```     
+
+构造函数与BufferedWriter的很类似。      
+
+我们来读取一个文件      
+
+```java
+public static void main(String[] args) {
+       try {
+           //先创建一个字符流对象与文件相关联
+           FileReader fileReader = new FileReader("test.txt");
+           //创建字符流缓冲区
+           BufferedReader bufReader = new BufferedReader(fileReader);
+
+           String line = null;
+           while ((line = bufReader.readLine()) != null) {
+               System.out.println(line);
+           }
+           bufReader.close();
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+```     
+
+可以输出文件中的内容，这段代码中出现了一个新的方法，`readLine()`。      
