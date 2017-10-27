@@ -348,4 +348,52 @@ public static void main(String[] args) {
 
 ```      
 
-这就是简单的自定义`readLine()`。      
+这就是简单的自定义`readLine()`。         
+
+
+### LineNumberReader       
+
+这个是BufferedReader的一个子类，我们来看一下这个类的官方描述：      
+
+```
+A buffered character-input stream that keeps track of line numbers.  This
+ * class defines methods {@link #setLineNumber(int)} and {@link
+ * #getLineNumber()} for setting and getting the current line number
+ * respectively.
+```        
+
+这个类可以在读取的时候跟踪行号，也提供了修改行号的方法。       
+
+我们来看个例子：    
+
+```java
+public static void main(String[] args) {
+        try {
+            FileReader fileReader = new FileReader("test.txt");
+            LineNumberReader lineNumberReader = new LineNumberReader(fileReader);
+            String content = null;
+
+            while ((content = lineNumberReader.readLine()) != null){
+                System.out.println(lineNumberReader.getLineNumber()+" " + content);
+            }
+
+            lineNumberReader.close();
+
+        }catch (FileNotFoundException e){
+            e.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+    }
+```      
+
+输出：      
+
+```
+1 BarackBao
+2 HelloWorld
+3 AndroidLab
+```      
+
+我们还可以使用`setLineNumber(int)`来更改行号，但是需要注意的是这个方法并不会改变流中的当前位置，只更改`getLineNumber()`方法返回的值。      
