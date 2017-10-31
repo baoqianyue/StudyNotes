@@ -1,5 +1,3 @@
-package binarytree;
-
 public class BinaryTree {
     //根结点
     private TreeNode root = null;
@@ -26,8 +24,8 @@ public class BinaryTree {
 
     /**
      * 构建一颗二叉树
-     * A
-     * B      C
+     *        A
+     *    B      C
      * D     E       F
      */
     public void createBinaryTree() {
@@ -104,15 +102,77 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * 中序遍历
+     * 左根右
+     */
+    public void midOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            midOrder(root.leftChild);
+            System.out.println(root.data);
+            midOrder(root.rightChild);
+        }
+    }
+
+    /**
+     * 后序遍历
+     * 左右根
+     */
+    public void postOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            postOrder(root.leftChild);
+            postOrder(root.rightChild);
+            System.out.println(root.data);
+        }
+    }
+
+    /**
+     * 非递归前序遍历
+     */
+    public void nonrecOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            Stack<TreeNode> stack = new Stack<>();
+            //我们需要把每个结点都压入栈中，因为每个结点都可以看作是一个子树的根结点
+            //首先我们把最上面的根结点压栈
+            stack.push(root);
+            //当栈不为空的时候，我们进行其他操作
+            while (!stack.empty()) {
+                /**
+                 * 因为是前序遍历，我们将子树的根结点弹出栈后，
+                 * 要立马将该结点的左右儿子压入栈中，保证下次循环的条件
+                 * 因为要先遍历左结点，所以在栈中，要让右儿子处于左儿子的下方
+                 */
+                TreeNode node = stack.pop();
+                System.out.println(node.data);
+                if (node.rightChild != null) {
+                    stack.push(node.rightChild);
+                }
+                if (node.leftChild != null) {
+                    stack.push(node.leftChild);
+                }
+
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
         binaryTree.createBinaryTree();
-        int height = binaryTree.getHeight();
-        System.out.println("the height is:" + height);
-        int size = binaryTree.getSize();
-        System.out.println("the size is:" + size);
+//        int height = binaryTree.getHeight();
+//        System.out.println("the height is:" + height);
+//        int size = binaryTree.getSize();
+//        System.out.println("the size is:" + size);
+        System.out.println("递归前序遍历：");
         binaryTree.preOrder(binaryTree.root);
+        System.out.println("非递归前序遍历：");
+        binaryTree.nonrecOrder(binaryTree.root);
     }
 
 
