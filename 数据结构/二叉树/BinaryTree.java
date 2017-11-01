@@ -1,3 +1,8 @@
+package binarytree;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class BinaryTree {
     //根结点
     private TreeNode root = null;
@@ -24,8 +29,8 @@ public class BinaryTree {
 
     /**
      * 构建一颗二叉树
-     *        A
-     *    B      C
+     * A
+     * B      C
      * D     E       F
      */
     public void createBinaryTree() {
@@ -39,6 +44,43 @@ public class BinaryTree {
         nodeB.leftChild = nodeD;
         nodeB.rightChild = nodeE;
         nodeC.rightChild = nodeF;
+    }
+
+
+    /**
+     * 通过前序遍历序列生成二叉树
+     * A
+     * B          C
+     * D      E            F
+     * 该序列为：ABD##E##C#F##
+     */
+    public void createBinaryTreePre(int size, ArrayList<String> data) {
+        createBinaryTreeByPre(data.size(), data);
+    }
+
+    private TreeNode createBinaryTreeByPre(int size, ArrayList<String> data) {
+        //获取集合中第一个结点
+        //每次执行函数的时候都会对集合中第一个结点进行操作
+        //所以我们要有remove操作
+        String d = data.get(0);
+        TreeNode node;
+        int index = size - data.size();
+        if (d.equals("#")) {
+            node = null;
+            //把#也要去掉
+            data.remove(0);
+            return node;
+        }
+        node = new TreeNode(index, d);
+        if (index == 0) {
+            //创建根结点
+            root = node;
+        }
+        data.remove(0);
+        node.leftChild = createBinaryTreeByPre(size, data);
+        node.rightChild = createBinaryTreeByPre(size, data);
+
+        return node;
     }
 
 
@@ -164,15 +206,22 @@ public class BinaryTree {
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
-        binaryTree.createBinaryTree();
+//        binaryTree.createBinaryTree();
 //        int height = binaryTree.getHeight();
 //        System.out.println("the height is:" + height);
 //        int size = binaryTree.getSize();
 //        System.out.println("the size is:" + size);
-        System.out.println("递归前序遍历：");
-        binaryTree.preOrder(binaryTree.root);
-        System.out.println("非递归前序遍历：");
-        binaryTree.nonrecOrder(binaryTree.root);
+//        System.out.println("递归前序遍历：");
+//        binaryTree.preOrder(binaryTree.root);
+//        System.out.println("非递归前序遍历：");
+//        binaryTree.nonrecOrder(binaryTree.root);
+        ArrayList<String> data = new ArrayList<>();
+        String[] array = new String[]{"A", "B", "D", "#", "#", "E", "#", "#", "C", "#", "F", "#", "#"};
+        for (String string : array) {
+            data.add(string);
+        }
+        TreeNode root = binaryTree.createBinaryTreeByPre(data.size(), data);
+        binaryTree.preOrder(root);
     }
 
 
