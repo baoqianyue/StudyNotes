@@ -1,16 +1,6 @@
-# StudyNotes
+# <font face="黑体" size = 40>StudyNotes</font>              
 
-<dl>
-   <dt>Categories</dt>
-   <dd><a href="#Android">Android</a></dd>
-   <dd><a href="#Java">Java</a></dd>
-   <dd><a href="#ComputerNetwork">计算机网络</a></dd>
-   <dd><a href="#Algorithms">算法</a></dd>
-   <dd><a href="#DesignPatterns">设计模式</a></dd>
-   <dd><a href="#计算机图形学">计算机图形学</a></dd>      
-
-
-</dl>
+# <font face="微软雅黑" size = 20>温故而知新</font>    
 
 
 
@@ -18,9 +8,6 @@
 
 
 
-更多内容，请看[这里](https://barackbao.cn) :-) 
 
 
-
-
-
+更多内容，请看[这里](https://barackbao.cn) :-)
