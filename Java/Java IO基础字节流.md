@@ -75,4 +75,93 @@ public static void main(String[] args) {
         }
 
     }
+```      
+
+可以看到这里的读取操作基本与之前使用字符流进行读取操作很类似，只是把字符流换成了相应的字节流而已。      
+
+下面我们来介绍一个新的方法`available()`       
+
+```java
+public static void main(String[] args) {
+        try {
+            FileInputStream fis = new FileInputStream("test.txt");
+            int num = fis.available();
+            System.out.println(num);
+            byte[] buf = new byte[num];
+            fis.read(buf);
+            System.out.println(new String(buf));
+            fis.close();
+        } catch (FileNotFoundException f) {
+            f.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+```      
+
+输出：    
+
+```
+6
+Barack
+```     
+
+我们看一下`available`的官方解释：      
+
+```java
+/**
+     * Returns an estimate of the number of remaining bytes that can be read (or
+     * skipped over) from this input stream without blocking by the next
+     * invocation of a method for this input stream. Returns 0 when the file
+     * position is beyond EOF. The next invocation might be the same thread
+     * or another thread. A single read or skip of this many bytes will not
+     * block, but may read or skip fewer bytes.
+     *
+     * <p> In some cases, a non-blocking read (or skip) may appear to be
+     * blocked when it is merely slow, for example when reading large
+     * files over slow networks.
 ```    
+
+就是说该方法可以返回当前文件剩余的字节数，可以提前设置数组的长度，该方法在后面的网络编程中还有其他的作用，未完待续...           
+
+
+## 字节流复制图片       
+
+我们先理一下思路：      
+
+* 创建字节读取流与原图片相关联     
+
+* 创建字节写入流创建新图片文件       
+
+* 循环读写，存储图片    
+
+* 关闭流      
+
+直接上代码，必须很熟练的写出来：      
+
+```java
+public static void main(String[] args) {
+       try {
+           //读取原图片
+           FileInputStream fis = new FileInputStream("testimg.jpg");
+           //写入新文件
+           FileOutputStream fos = new FileOutputStream("copy_img.png");
+           int length = fis.available();
+           byte[] buf = new byte[length];
+           int ch = 0;
+           while ((ch = fis.read(buf)) != -1) {
+               fos.write(buf, 0, ch);
+           }
+           fis.close();
+           fos.close();
+       } catch (FileNotFoundException e) {
+           e.printStackTrace();
+       } catch (IOException e) {
+           e.printStackTrace();
+       }
+   }
+```    
+
+
+这样图片就复制好了。       
