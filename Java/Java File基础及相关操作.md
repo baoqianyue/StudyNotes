@@ -204,13 +204,17 @@ E:\
 
 ```java
 public static void main(String[] args) {
-        File f = new File("D:\\");
-        String[] fileList = f.list();
-        for (String file : fileList) {
-            System.out.println(file);
+        File file = new File("D:\\");
+        //使用过滤器
+        String[] fileNameList = file.list();
+        for (String filename : fileNameList) {
+            System.out.println(filename);
         }
-    }
-```      
+        File[] fileList = file.listFiles();
+        for (File file1 : fileList) {
+            System.out.println(file1);
+        }
+    }```      
 
 输出：     
 
@@ -239,6 +243,30 @@ test.txt
 TestProjects
 TIM
 百度云盘
+D:\$RECYCLE.BIN
+D:\17-C-Train
+D:\360Zip
+D:\ACMCollections
+D:\AndroidProjects
+D:\AndroidStudio
+D:\BaiduNetdiskDownload
+D:\Cleaner
+D:\CloudMusic
+D:\Dev-Cpp
+D:\Download
+D:\GameDownload
+D:\Intellij IDEA
+D:\KotlinLoad
+D:\Oj C
+D:\SS
+D:\StudyNotes
+D:\Sublime Text 3
+D:\System Volume Information
+D:\test
+D:\test.txt
+D:\TestProjects
+D:\TIM
+D:\百度云盘
 ```     
 
 ### 文件过滤     
