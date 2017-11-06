@@ -49,8 +49,8 @@ public class BinaryTree {
 
     /**
      * 通过前序遍历序列生成二叉树
-     * A
-     * B          C
+     *          A
+     *     B          C
      * D      E            F
      * 该序列为：ABD##E##C#F##
      */
