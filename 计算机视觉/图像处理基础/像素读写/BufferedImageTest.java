@@ -48,8 +48,8 @@ public class BufferedImageTest extends JComponent implements ActionListener {
         this.getRGB(image, 0, 0, width, height, pixels);
         //将二维数组转成一维数组,index为原来二维数组中的索引
         int index = 0;
-        for (int row = 0; row < width; row++) {
-            for (int col = 0; col < height; col++) {
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 index = row * width + col;
                 int pixel = pixels[index];
                 //pixel为具体的像素值，我们现在要分离出来各个通道的像素值
