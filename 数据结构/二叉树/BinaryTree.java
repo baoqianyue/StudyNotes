@@ -1,5 +1,8 @@
 package binarytree;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class BinaryTree {
     //根结点
     private TreeNode root = null;
@@ -41,6 +44,43 @@ public class BinaryTree {
         nodeB.leftChild = nodeD;
         nodeB.rightChild = nodeE;
         nodeC.rightChild = nodeF;
+    }
+
+
+    /**
+     * 通过前序遍历序列生成二叉树
+     *          A
+     *     B          C
+     * D      E            F
+     * 该序列为：ABD##E##C#F##
+     */
+    public void createBinaryTreePre(int size, ArrayList<String> data) {
+        createBinaryTreeByPre(data.size(), data);
+    }
+
+    private TreeNode createBinaryTreeByPre(int size, ArrayList<String> data) {
+        //获取集合中第一个结点
+        //每次执行函数的时候都会对集合中第一个结点进行操作
+        //所以我们要有remove操作
+        String d = data.get(0);
+        TreeNode node;
+        int index = size - data.size();
+        if (d.equals("#")) {
+            node = null;
+            //把#也要去掉
+            data.remove(0);
+            return node;
+        }
+        node = new TreeNode(index, d);
+        if (index == 0) {
+            //创建根结点
+            root = node;
+        }
+        data.remove(0);
+        node.leftChild = createBinaryTreeByPre(size, data);
+        node.rightChild = createBinaryTreeByPre(size, data);
+
+        return node;
     }
 
 
@@ -104,15 +144,84 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * 中序遍历
+     * 左根右
+     */
+    public void midOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            midOrder(root.leftChild);
+            System.out.println(root.data);
+            midOrder(root.rightChild);
+        }
+    }
+
+    /**
+     * 后序遍历
+     * 左右根
+     */
+    public void postOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            postOrder(root.leftChild);
+            postOrder(root.rightChild);
+            System.out.println(root.data);
+        }
+    }
+
+    /**
+     * 非递归前序遍历
+     */
+    public void nonrecOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        } else {
+            Stack<TreeNode> stack = new Stack<>();
+            //我们需要把每个结点都压入栈中，因为每个结点都可以看作是一个子树的根结点
+            //首先我们把最上面的根结点压栈
+            stack.push(root);
+            //当栈不为空的时候，我们进行其他操作
+            while (!stack.empty()) {
+                /**
+                 * 因为是前序遍历，我们将子树的根结点弹出栈后，
+                 * 要立马将该结点的左右儿子压入栈中，保证下次循环的条件
+                 * 因为要先遍历左结点，所以在栈中，要让右儿子处于左儿子的下方
+                 */
+                TreeNode node = stack.pop();
+                System.out.println(node.data);
+                if (node.rightChild != null) {
+                    stack.push(node.rightChild);
+                }
+                if (node.leftChild != null) {
+                    stack.push(node.leftChild);
+                }
+
+            }
+        }
+    }
+
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
-        binaryTree.createBinaryTree();
-        int height = binaryTree.getHeight();
-        System.out.println("the height is:" + height);
-        int size = binaryTree.getSize();
-        System.out.println("the size is:" + size);
-        binaryTree.preOrder(binaryTree.root);
+//        binaryTree.createBinaryTree();
+//        int height = binaryTree.getHeight();
+//        System.out.println("the height is:" + height);
+//        int size = binaryTree.getSize();
+//        System.out.println("the size is:" + size);
+//        System.out.println("递归前序遍历：");
+//        binaryTree.preOrder(binaryTree.root);
+//        System.out.println("非递归前序遍历：");
+//        binaryTree.nonrecOrder(binaryTree.root);
+        ArrayList<String> data = new ArrayList<>();
+        String[] array = new String[]{"A", "B", "D", "#", "#", "E", "#", "#", "C", "#", "F", "#", "#"};
+        for (String string : array) {
+            data.add(string);
+        }
+        TreeNode root = binaryTree.createBinaryTreeByPre(data.size(), data);
+        binaryTree.preOrder(root);
     }
 
 
