@@ -55,6 +55,22 @@ int yVelocity = (int) velocityTracker.getYVelocity();
 `速度 = 位移 / 时间`        
 最终计算得到的速度就是单位时间间隔内手指在水平或竖直方向上所滑动的像素数。        
 
+
+## View的滑动     
+View的滑动可以看作是许多炫酷效果的基础，因为他们本质上都是在做滑动操作。        
+通过三种方式可以实现View的滑动：直接使用View的scrollTo/scrollBy方法来实现View内容的滑动，使用动画给View施加平移效果达到滑动，改变View的LayoutParams参数使布局改变实现滑动。      
+
+### 使用scrollTo/scrollBy      
+这两个方法是专门为View的滑动设计的，但是它只能实现对View内容的滑动。    
+
+看一下View源码中这两个方法的实现：     
+
+```java
+
+```
+
+   
+
  
 
 
