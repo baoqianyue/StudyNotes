@@ -51,6 +51,17 @@
 
 ***    
 
+* 图像保存：imwrite()函数   
+
+  函数原型   
+
+  ```c++
+  imwrite( const String& filename, InputArray img,
+              const std::vector<int>& params = std::vector<int>())
+  ```  
+  
+  第一个参数就是指定保存的文件名，需要指定图片格式(jpg,png,tiff)，第二个参数就是图片mat    
+
 
 * InputArray(OutputArray)类型        
 
