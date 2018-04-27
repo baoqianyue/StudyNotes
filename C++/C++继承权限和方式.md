@@ -71,6 +71,7 @@ private:
     using People::show; //将基类中public成员的权限修改为private
 };
 
+
 void Student::read() {
     cout << "姓名为:" << m_name << "年龄为:" << m_age << "分数为:" << m_grade << endl;
 }
