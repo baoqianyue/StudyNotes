@@ -217,8 +217,3 @@ parseInt = function () {
 parseInt('10');
 parseInt('23');
 console.log('count = ' + count);
-
-
-
-
-
