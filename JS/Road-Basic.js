@@ -1,34 +1,34 @@
 //console.log('helloworld');
 
 //创建对象，是有一组键值对组成的无序集合
-// var person = {
-//     name: "baoqianyue",
-//     age: 20,
-//     tags: ['js', 'web', 'moblie'],
-//     city: "taiyuan",
-//     hasCar: false,
-//     zipcode: null
-// }
+var person = {
+    name: "baoqianyue",
+    age: 20,
+    tags: ['js', 'web', 'moblie'],
+    city: "taiyuan",
+    hasCar: false,
+    zipcode: null
+}
 
 /*
     字符串模板
 */
 
-// var name = '小明';
-// var age = 20;
-// var message = '你好，${name},今年${age}岁了';
-// alert(message);
+var name = '小明';
+var age = 20;
+var message = '你好，${name},今年${age}岁了';
+alert(message);
 
 
 
 /*
     字符串函数
 */
-// var s = "Hello,world";
-// s[0]; //使用索引获取字符，如果索引越界不会报错，但是会返回undefined
-// s.toUpperCase(); //将字符串大写，但是不会更改原来的字符串，而是返回一个新的字符串
-// s.indexOf('world');//返回字符串出现的位置,没有找到返回-1
-// s.substring(0,5);//截取字符串，含头不含尾
+var s = "Hello,world";
+s[0]; //使用索引获取字符，如果索引越界不会报错，但是会返回undefined
+s.toUpperCase(); //将字符串大写，但是不会更改原来的字符串，而是返回一个新的字符串
+s.indexOf('world');//返回字符串出现的位置,没有找到返回-1
+s.substring(0,5);//截取字符串，含头不含尾
 
 
 /*
@@ -37,119 +37,118 @@
 
 // 获取Array的长度，直接访问属性
 // 如果给Array的length赋值会修改Array的长度
-// var arr = [1,3,2,'Hello',null,true];
-// console.log(arr.length);
-// arr.length = 10;//长度发生改变
-// console.log(arr.length); 
-//也可以通过对索引赋值来将对应的元素修改，而且如果对索引赋值的时候超过了范围，也会变长array的长度
-// arr[10] = 0;//Array长度发生变换
-// console.log(arr.length);
-//js中如果数组访问越界不会有任何报错，所以不建议直接修改Array的大小，以索引访问时要保证不越界
+var arr = [1,3,2,'Hello',null,true];
+console.log(arr.length);
+arr.length = 10;//长度发生改变
+console.log(arr.length); 
+// 也可以通过对索引赋值来将对应的元素修改，而且如果对索引赋值的时候超过了范围，也会变长array的长度
+arr[10] = 0;//Array长度发生变换
+console.log(arr.length);
+// js中如果数组访问越界不会有任何报错，所以不建议直接修改Array的大小，以索引访问时要保证不越界
 
-//indexOf,与String类似，Array也可以通过indexOf来获取一个元素的位置
-// var arr = [20,32,'bao',1,true];
-// console.log(arr.indexOf(32));
+// indexOf,与String类似，Array也可以通过indexOf来获取一个元素的位置
+var arr = [20,32,'bao',1,true];
+console.log(arr.indexOf(32));
 
 
-//slice，对应String的subString,截取Array的部分元素，然后返回一个新的Array
-// var arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
-// var arr1 = arr.slice(0, 3);//含头不含尾
-// for (var x of arr1) {
-//     console.log(x);
-// }
-// var arr2 = arr.slice(3);//从索引3开始到结束
-// for (var x of arr2) {
-//     console.log(x);
-// }
-// //如果不给slice传任何参数，它就会从头到尾截取所有元素，所以可以使用这种方式来复制一个Array
-// var arr3 = arr.slice();
-// for (var x of arr3) {
-//     console.log(x);
-// }
+// slice，对应String的subString,截取Array的部分元素，然后返回一个新的Array
+var arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+var arr1 = arr.slice(0, 3);//含头不含尾
+for (var x of arr1) {
+    console.log(x);
+}
+var arr2 = arr.slice(3);//从索引3开始到结束
+for (var x of arr2) {
+    console.log(x);
+}
+//如果不给slice传任何参数，它就会从头到尾截取所有元素，所以可以使用这种方式来复制一个Array
+var arr3 = arr.slice();
+for (var x of arr3) {
+    console.log(x);
+}
 
 
 //push和pop，push()向Array的尾部添加元素，pop()吧Array的最后一个元素删除掉
 //unshift和shift，unshift()向Array的头部添加元素，shift()函数将第一个元素删掉
-// var arr = [1, 23];
-// arr.push(30);
-// arr.push(2, 100);
-// arr.pop();
-// arr.unshift(233, 0);
-// arr.shift();
-// for (var x of arr) {
-//     console.log(x);
-// }
-
+var arr = [1, 23];
+arr.push(30);
+arr.push(2, 100);
+arr.pop();
+arr.unshift(233, 0);
+arr.shift();
+for (var x of arr) {
+    console.log(x);
+}
 
 //sort排序，直接使用array调用，它会直接修改当前Array的元素位置，直接调用时，按照默认顺序排序
 //可以通过函数的方式自定义排序规则
-// var arr = ['A','c','B'];
-// arr.sort();
-// for (var x of arr) {
-//     console.log(x);
-// }
+var arr = ['A','c','B'];
+arr.sort();
+for (var x of arr) {
+    console.log(x);
+}
 
 
 //Array的万能方法splice，可以从指定的索引开始删除若干元素，然后再从该位置添加若干元素
-// var arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
-// //从索引2开始删除3个元素，然后再添加2个元素
-// //返回被删除的元素构成的Array
-// var deleteArr = arr.splice(2, 3, 'Google', 'Facebook');
-// for (var x of arr) {
-//     console.log(x);
-// }
-// for (var x of deleteArr) {
-//     console.log('deleted atom: ' + x);
-// }
-// //只删除，不添加，就只写前两个参数即可
-// arr.splice(1, 2);
-// for (var x of arr) {
-//     console.log(x);
-// }
+var arr = ['Microsoft', 'Apple', 'Yahoo', 'AOL', 'Excite', 'Oracle'];
+//从索引2开始删除3个元素，然后再添加2个元素
+//返回被删除的元素构成的Array
+var deleteArr = arr.splice(2, 3, 'Google', 'Facebook');
+for (var x of arr) {
+    console.log(x);
+}
+for (var x of deleteArr) {
+    console.log('deleted atom: ' + x);
+}
+//只删除，不添加，就只写前两个参数即可
+arr.splice(1, 2);
+for (var x of arr) {
+    console.log(x);
+}
 
 
-//concat()将两个Array连接起来并返回一个新的Array
-// var arr = ['A', 'B', 'C'];
-// var arrAdd = arr.concat([1, 2, 3]);
-// arrAdd.forEach(function (element, index, array) {
-//     console.log(element);
-// });
-// //其实concat方法并没有直接修改Array，而是返回了一个新的Array
-// //concat方法可以接受任意个元素和array，并且自动把array拆开，然后全部添加到新的array中
-// var newArrAdd = arrAdd.concat(100);
-// newArrAdd.forEach(function (element, index, array) {
-//     console.log("the element is: " + element);
-//     console.log('the index is: ' + index);
-// });
+// concat()将两个Array连接起来并返回一个新的Array
+var arr = ['A', 'B', 'C'];
+var arrAdd = arr.concat([1, 2, 3]);
+arrAdd.forEach(function (element, index, array) {
+    console.log(element);
+});
+//其实concat方法并没有直接修改Array，而是返回了一个新的Array
+//concat方法可以接受任意个元素和array，并且自动把array拆开，然后全部添加到新的array中
+var newArrAdd = arrAdd.concat(100);
+newArrAdd.forEach(function (element, index, array) {
+    console.log("the element is: " + element);
+    console.log('the index is: ' + index);
+});
 
 
-//join方法，他可以将当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
-//如果Array的元素不全是字符串，将自动转换为字符串后链接
-// var arr = ['A', 'B', 1, 2, 34, 0];
-// var x = arr.join("-");
-// console.log(x);
+// join方法，他可以将当前Array的每个元素都用指定的字符串连接起来，然后返回连接后的字符串
+// 如果Array的元素不全是字符串，将自动转换为字符串后链接
+var arr = ['A', 'B', 1, 2, 34, 0];
+var x = arr.join("-");
+console.log(x);
 
-// var arr = ['小红','小明','大军','阿黄'];
-// arr.sort();
-// var end = arr[3];
-// var newArr = arr.slice(0,3);
-// var str = newArr.join(',');
-// console.log("欢迎"+str+"和"+end+"同学!");
+var arr = ['小红','小明','大军','阿黄'];
+arr.sort();
+var end = arr[3];
+var newArr = arr.slice(0,3);
+var str = newArr.join(',');
+console.log("欢迎"+str+"和"+end+"同学!");
 
 
 /**
  * 对象，是一种无序的集合数据类型，由若干key-value组成
  * 在对象定义内部，键值对用逗号隔开
  */
-// var baoqianyue = {
-//     name: 'baoqianyue',
-//     sex: true,
-//     birth: 1998,
-//     height: 1.80,
-//     score: null
-// }
+var baoqianyue = {
+    name: 'baoqianyue',
+    sex: true,
+    birth: 1998,
+    height: 1.80,
+    score: null
+}
 //将对象赋值给变量后，就可以通过变量名来访问到其中的属性了
-// console.log('姓名为:' + baoqianyue.name);
+console.log('姓名为:' + baoqianyue.name);
 //访问对象中的属性是通过.来访问的，这就需要我们保证对象定义中需要有有效的变量名
 //如果属性名中含有特殊字符，就必须用''抱起来
 var baoqianyue = {
@@ -157,17 +156,17 @@ var baoqianyue = {
     'middle-school': 'No.1 Middle School'
 };
 //而且这个含有特殊字符的属性在被访问时，也不能用.来访问了，需要使用[]
-// console.log(baoqianyue.name);
-// console.log(baoqianyue['middle-school']);
-// console.log(baoqianyue['name']);
+console.log(baoqianyue.name);
+console.log(baoqianyue['middle-school']);
+console.log(baoqianyue['name']);
 //因为js中对象是动态类型，所以可以自由的给一个对象添加或者删除属性
-// baoqianyue.age = 20;//添加一个属性
-// console.log(baoqianyue.age);
-// delete baoqianyue.age;//删除一个属性
-// console.log(baoqianyue.age);
-// delete baoqianyue['name'];
-// console.log(baoqianyue.name);
-// delete baoqianyue.sex;//删除一个不存在的属性也不会报错
+baoqianyue.age = 20;//添加一个属性
+console.log(baoqianyue.age);
+delete baoqianyue.age;//删除一个属性
+console.log(baoqianyue.age);
+delete baoqianyue['name'];
+console.log(baoqianyue.name);
+delete baoqianyue.sex;//删除一个不存在的属性也不会报错
 
 //如果我们要检测一个对象中是否含有一个属性，使用in操作符
 // console.log('name' in baoqianyue);
