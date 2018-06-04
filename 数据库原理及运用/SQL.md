@@ -100,7 +100,31 @@ SQL是一种国际标准
     CREATE UNIQUE INDEX Coucno ON Course(Cno);
     //SC表按学号升序和课程号降序建唯一索引
     CREATE UNIQUE INDEX SCsnocno ON SC(Sno ASC,Cno DESC);
-    ```
+    ```   
+
+* 修改索引     
+
+    ```sql
+    //修改索引名  
+    ALTER INDEX SCsnocno RENAME TO SCno;
+    ```    
+
+* 删除索引    
+
+    ```sql 
+    DROP INDEX Stusno;
+    ```   
+
+* 数据字典    
+    数据字典包括数据项，数据结构，数据流，数据存储，处理过程。   
+
+    数据字典就是在数据库内部的一组系统表，存储数据库中的所有定义信息，包括关系模式定义，视图定义，索引定义，完整性约束定义，各类用户对数据库的操作权限。   
+
+    当执行上面sql中数据定义的语句时，其实就是在更新数据字典这个系统表中的内容。    
+
+## 数据查询    
+
+
     
 
 
