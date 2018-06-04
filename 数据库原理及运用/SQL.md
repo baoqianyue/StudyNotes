@@ -122,10 +122,172 @@ SQL是一种国际标准
 
     当执行上面sql中数据定义的语句时，其实就是在更新数据字典这个系统表中的内容。    
 
-## 数据查询    
+## 数据查询   
 
+* 单表查询    
+
+* 连接查询    
+
+* 嵌套查询       
+    * 带有比较运算符的子查询    
+
+        ```sql
+        //找出每个学生超过他自己选修课程平均成绩的课程号
+        SELECT Sno,Cno
+        FROM SC x
+        WHERE Grade >= (
+            SELECT AVG(Grade)
+            FROM SC y
+            WHERE x.Sno = y.Sno
+        );
+        ```        
+    * 带有ANY或ALL谓词的子查询     
+    
+        ```sql
+        //查询非计算机系中比计算机系任意一个学生年龄小的学生姓名和年龄
+        SELECT Sname,Sage
+        FROM Student
+        WHERE Sage < ANY (
+            SELECT Sage
+            FROM Student
+            WHERE Sdept = 'CS'
+        ) AND Sdept <> 'CS;
+        ```  
+
+    * 带有EXISTS谓词的子查询     
+
+        ```sql
+        //查询所有选修了1号课程的学生姓名
+        SELECT Sname
+        FROM Student
+        WHERE EXISTS(
+            SELECT * 
+            FROM SC
+            WHERE Sno = Student.Sno AND Cno = '1';
+        )
+        ```
+    
+
+* 集合查询     
+
+
+## 数据更新    
+
+* 插入数据    
+
+    * 插入元组    
+
+        ```sql
+        //插入一个新学生元组到Student表
+        INSERT 
+        INTO Student(Sno,Sname,Ssex,Sdept,Sage)
+        VALUES('201215128','陈东','男','IS',18)
+        ```
+
+    * 插入子查询的结果    
+
+        ```sql
+        //先创建一个新表
+        CREATE TABLE Dept_age(
+            Sdept CHAR(15),
+            Avg_age SMALLINT
+        );
+        
+        //计算每个专业的平均年龄，插入表中
+        INSERT 
+        INTO Dept_age(Sdept,Avg_age)
+        SELECT Sdept,AVG(Sage)
+        FROM Student
+        GROUP BY Sdept;
+        ```
+
+* 修改数据    
+
+    * 修改一个或多个元组的值  
+
+        ```sql
+        UPDATE Student 
+        SET Sage = 22
+        WHERE Sno = '201215121';
+
+        UPDATE Student 
+        SET Sage = Sage + 1;
+        ```
+
+    * 带子查询的修改语句
+
+        ```sql
+        UPDATE SC
+        SET Grade = 0
+        WHERE Sno IN(
+            SELECT Sno 
+            FROM Student
+            WHERE Sdept = 'CS'
+        );
+        ```
+
+* 删除数据    
+
+    * 删除一个或多个元组的值
+
+        ```sql
+        DELETE 
+        FROM Student 
+        WHERE Sno = '201215128';
+
+        DELETE 
+        FROM Student;
+        ```
+
+    * 带有子查询的删除语句    
+
+        ```sql
+        DELETE 
+        FROM SC
+        WHERE Sno IN(
+            SELECT Sno
+            FROM Student
+            WHERE Sdept = 'CS'
+        );
+        ``` 
+
+## 视图    
+
+* 定义视图   
+
+    * 行列子集视图(从基本表中导出，只是去掉了基本表中的某些行或列)
+        ```sql
+        CREATE VIEW IS_Student(Sno,Sname,Sage)
+        AS 
+        SELECT Sno,Sname,Sage
+        FROM Student
+        WHERE Sdept = 'IS'
+        WITH CHECK OPTION;
+        ```   
+
+    * 建立从多个基本表中导出的视图
+
+        ```sql
+        CREATE VIEW Good_C1_Stu(Sno,Sname,Sage)
+        AS 
+        SELECT Student.Sno,Sname,Sage
+        FROM Student,SC
+        WHERE Student.Sno = SC.Sno AND Grade >= 90 AND Cno = '1';
+        ```  
+
+* 删除视图    
+
+    ```sql
+    DROP VIEW IS_Student CASCADE; //强制删除
+    ```   
+
+* 查询视图    
+
+    `并不是所有的视图都是可以更新的，因为有些视图的更新不能唯一的有意义的转换成对相应基本表的更新`      
 
     
+
+
 
 
 
