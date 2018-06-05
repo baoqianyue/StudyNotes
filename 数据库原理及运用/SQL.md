@@ -283,11 +283,59 @@ SQL是一种国际标准
 
 * 查询视图    
 
-    `并不是所有的视图都是可以更新的，因为有些视图的更新不能唯一的有意义的转换成对相应基本表的更新`      
-
-    
+    `并不是所有的视图都是可以更新的，因为有些视图的更新不能唯一的有意义的转换成对相应基本表的更新`       
 
 
+## 授权     
 
+用户权限是由数据库对象和操作类型组成的，在数据库中，定义存取权限称为授权。      
 
+* 授权：授予与收回    
 
+    * GRANT   
+        ```sql
+        //将查询Student表的权限授予用户U1
+        GRANT SELECT 
+        ON TABLE Student
+        TO U1;
+
+        //把对Student和Course表的全部操作权限授予U2和U3
+        GRANT ALL PRIVILEGES
+        ON TABLE Student,Course
+        TO U2,U3
+
+        //把对表SC的查询权限授予所有用户
+        GRANT SELECT 
+        ON TABLE SC
+        TO PUBLIC; 
+
+        //把查询Student和修改学生学号的权限授予用户U4
+        GRANT UPDATE(Sno),SELECT
+        ON TABLE Student
+        TO U4         
+
+        //把对表SC的插入权限授予U5，并允许他将此权限继续传递
+        GRANT INSERT
+        ON TABLE SC 
+        TO U5
+        WITH GRANT OPTION;
+        ```           
+
+    * REVOKE   
+
+        ```sql
+        //将用户U4修改学生学号的权限收回
+        REVOKE UPDATE(Sno)
+        ON TABLE Student
+        FROM U4;
+
+        //收回所有用户对表SC的查询权限
+        REVOKE SELECT
+        ON TABLE SC
+        FROM PUBLIC;
+
+        //把用户U5对SC表的插入权限收回 
+        REVOKE INSERT 
+        ON TABLE SC
+        FROM U5 CASCADE;
+        ```
