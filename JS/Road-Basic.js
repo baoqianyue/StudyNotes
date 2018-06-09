@@ -17,7 +17,18 @@ var person = {
 var name = '小明';
 var age = 20;
 var message = '你好，${name},今年${age}岁了';
-alert(message);
+alert(message);  
+
+//循环嵌套
+let names = ['bao','qian','yue'];
+let str = `
+    <ul>
+        ${
+            names.map(name => `<li>Hello,I am ${name}</li>`).join('')
+        }
+    </ul>
+`;
+document.querySelector('body').innerHTML = str;
 
 
 

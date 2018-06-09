@@ -175,6 +175,26 @@ x => {
 //如果要返回一个对象,如果是单表达式,就需要用()将对象{}抱起来
 x => ({ foo: x });
 
+let value = 2;
+let double = x => x * 2;
+let treble = x => {
+    return x * 3;
+}
+console.log("double:", double(value));
+console.log("treble:", treble(value));
+
+//箭头函数无独立作用域   
+var obj = {
+    commonFn: function () {
+        console.log(this);
+    },
+    arrowFn: () => {
+        console.log(this);
+    }
+}
+obj.commonFn();//this指向调用者obj
+obj.arrowFn();//this指向obj所在作用域，window  
+
 
 
 
