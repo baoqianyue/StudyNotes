@@ -53,7 +53,22 @@
         ```java
         @RequestMapping(value = "/hello/say",method = Request.GET)
         @GetMapping(value = "/hello/say")
-        ```        
+        ```          
+
+
+## 数据库操作      
+
+### RESTful API设计     
+
+|  请求类型  |  请求路径     |  功能     | 
+|-----|------|-------|   
+| GET   |   /girls     |     请求girl列表       |
+| POST   | /girls     |   创建一个girl  |   
+| GET    |  /girls/id  |  通过id查询一个girl  |   
+| PUT    |  /girls/id  |  通过id更新一个girl |    
+| DELETE | /girls/id   |  通过id删除一个girl |   
+
+
 
 
     
