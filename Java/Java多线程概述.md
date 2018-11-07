@@ -78,16 +78,20 @@ BarackBao
 BarackBao
 ```      
 
-可以看到时交替输出的，这个就可以体现出多线程，这段程序最少是有两个线程在同时作用，两个线程在一起竞争cpu，但是cpu在同一时间只能执行一个任务，但这是对于单核cpu来说的，某一时刻，哪个线程争取到了cpu，就执行哪个线程，cpu在两个线程之间迅速切换来执行任务，就给我们一种两个线程同时执行的假象。        
+可以看到时交替输出的，这个就可以体现出多线程的并发性，这段程序最少是有两个线程在同时作用，两个线程在一起竞争cpu，但是cpu在同一时间只能执行一个任务，但这是对于单核cpu来说的，某一时刻，哪个线程争取到了cpu，就执行哪个线程，cpu在两个线程之间迅速切换来执行任务，就给我们一种两个线程同时执行的假象。   
+
+比如分时操作系统中，引入了时间片，系统中每一个进程都可以先执行一个时间片的时间间隔，时间片完就去执行下一个进程的任务，就会给人一种多个进程同时执行的感觉。   
+
 
 ## run()和线程的生命周期         
 
 * run()      
-我们在新建了一个线程后，要重写父类的run()函数，而重写的内容就是我们要让该线程要执行的代码，所以run()的作用就是存储线程执行任务的代码。     
+
+    我们在新建了一个线程后，要重写父类的run()函数，而重写的内容就是我们要让该线程要执行的代码，所以run()的作用就是存储线程执行任务的代码。     
 
 * 线程执行的过程(生命周期)     
 
-![](../image/javathreadlife.png)      
+    ![](../image/javathreadlife.png)      
 
 ## 使用Runnable接口实现线程     
 
@@ -197,34 +201,34 @@ Thread-0 课余量82
 
 * 实现     
 
-```java
-public class Elective implements Runnable {
+    ```java
+    public class Elective implements Runnable {
 
-    private int classes = 100;
+        private int classes = 100;
 
-    @Override
-    public void run() {
-        while (true) {
-            if (classes > 0) {
-                System.out.println(Thread.currentThread().getName() + " 课余量" + classes--);
+        @Override
+        public void run() {
+            while (true) {
+                if (classes > 0) {
+                    System.out.println(Thread.currentThread().getName() + " 课余量" + classes--);
+                }
             }
         }
     }
-}
 
-public class Main {
+    public class Main {
 
-    public static void main(String[] args) {
-        Elective elective = new Elective();
-        Thread thread1 = new Thread(elective);
-        Thread thread2 = new Thread(elective);
-        Thread thread3 = new Thread(elective);
-        thread1.start();
-        thread2.start();
-        thread3.start();
+        public static void main(String[] args) {
+            Elective elective = new Elective();
+            Thread thread1 = new Thread(elective);
+            Thread thread2 = new Thread(elective);
+            Thread thread3 = new Thread(elective);
+            thread1.start();
+            thread2.start();
+            thread3.start();
+        }
     }
-}
-```    
+    ```    
 
 输出结果是正确的，这样实现的好处就是避免了单继承的局限性，让类的只有一个继承的限额去实现更重要的任务，在定义线程时建议采用这种方式。        
 
