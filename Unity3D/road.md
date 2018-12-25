@@ -1,8 +1,9 @@
-# Unity3D     
+# Unity3D总结   
+> 1607104130 鲍骞月 
 
 我从大一开始就养成了一种习惯，学习编程相关知识的时候总是要使用`Markdown`语法写一下学习笔记，并且放在我自己的Github仓库或者个人博客上面，分享给他人，我认为编程相关的知识都需要自己去一个字一个单词的亲手码出来，尤其是学习一门编程语言的时候，也许看了一遍概念感觉自己看懂了，但其实自己实际去写一下会发现很多很多问题，如果自己的代码量足够多，自然会形成一种肌肉记忆，如果再加一些自己的思考在里面，很容易就能发掘出来很多语言，很多框架，很多软件在设计时的共通之处，所以下面的总结其实主要来源于我在一步一步学习Unity3D时写的学习笔记，为了能够方便美观的显示一些代码段，我仍然使用Markdown文档渲染    
 
-> 该作业GitHub地址:     
+> 该作业GitHub地址:https://github.com/shentibeitaokongle/StudyNotes/blob/master/Unity3D/road.md     
 > 我的个人博客: http://barackbao.com     
 
 ## 1.Unity主界面  
@@ -485,7 +486,6 @@ Unity是一个`Component-Based`的引擎，所以需要有一个客观存在的�
                     instance = FindObjectOfType (typeof(T)) as T;
                     if (_instance == null) {
                         GameObject obj = new GameObject ();
-                        obj.hideFlags = HideFlags.HideAndDontSave;//隐藏实例化的new game object，下同
                         _instance = obj.AddComponent (typeof(T));
                     }
                 }
@@ -504,7 +504,7 @@ Unity是一个`Component-Based`的引擎，所以需要有一个客观存在的�
     ```
 
 
-## 7. Unity3D操作问题解决记录   
+## 8. Unity3D操作问题解决记录   
 在学习过程中遇到了一些操作上的问题,这里做一下记录    
 
 1. 在Unity中Scripts文件夹下新创建了一个脚本,双击该脚本在VS或者其他编辑器中打开时,并不能马上包含在项目目录中,就不能得到相应的代码提示和错误检查,比如在Vs中会提示当前库目录为Csharp杂项问题    
@@ -515,7 +515,7 @@ Unity是一个`Component-Based`的引擎，所以需要有一个客观存在的�
     ![img](./img/bug1a.png)   
     ![img](./img/bug1b.png)       
 
-## 8. 个人学习心得    
+## 9. 个人学习心得    
 
 在学习Unity之前我主要学习方向为Android开发，图像处理和OpenCV，所以在学习Unity3D开发的时候我总是能和之前做过的项目联系起来，同时我也总是思考怎么和本学期开设的**计算机图形学课程**联系起来，感受最深的是，在学习到Unity中的摄像机时，可以直接看到当前摄像机观察的**观察视锥体**，并且可以直接通过变换工具调整视角和视锥体的大小和位置，让我理解了此前学习图形学中一直令我头大的透视投影，因为我实在无法在纸上将各个坐标系和实际的投影情况画出来，而且凭借自己的空间想象能力将一个复杂的场景变换想象出来实在太困难，而且在掌握了一些图形学基本概念之后再来看Unity，就会觉得某些设计和概念是顺理成章的。     
 
