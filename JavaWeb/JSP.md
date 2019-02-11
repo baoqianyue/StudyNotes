@@ -53,7 +53,30 @@ JSP部署在服务器上，用于响应客户端发送的请求，并根据请�
     <%--java包引入语句块--%>
     <%@ page import="java.util.*" %>
     <%@ page import="java.text.*" %>
-    ```  
+    ```   
+
+### JSP内置对象    
+
+#### request对象   
+
+request代表来自客户端的请求，例如在Form表单中填写的信息，客户端的请求信息被封装在request对象中，通过该对象，才能在服务端获得请求的信息，然后做出相应的响应   
+request对象是`HttpServletRequest`类的实例    
+
+```java
+//通过一个元素的name属性获得该元素的value
+request.getParameter(String name);
+``` 
+
+#### response对象    
+
+response对象代表来自服务端的响应，当服务端需要向客户端发送数据时，使用response对象承载    
+
+response对象是`HttpSerlvetResponse`类的实例    
+
+```java
+//返回响应使用的字符编码集
+String getCharacterEncoding();
+```
 
 
 
