@@ -8,7 +8,7 @@ JSP部署在服务器上，用于响应客户端发送的请求，并根据请�
     在声明块中只能进行变量和方法的声明和定义，且作用域为成员变量     
     标志`<%! %>`    
 
-    ```html
+    ```java
     <%!
     //声明变量
     String str = "HelloWorld";
@@ -24,7 +24,7 @@ JSP部署在服务器上，用于响应客户端发送的请求，并根据请�
     脚本块中可以放置java逻辑代码，在脚本块中声明的变量为局部变量   
     标志`<% %>`   
     
-    ```html
+    ```java
     <% out.println(this.str);%>
     ```    
 
@@ -32,7 +32,7 @@ JSP部署在服务器上，用于响应客户端发送的请求，并根据请�
 
     可以将java方法输出的内容或者java变量的值输出到web页面上，并且可以和html标签进行交叉编写   
     标志`<%= %>`
-    ```html
+    ```java
     <%!
     public String getNow() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
@@ -49,7 +49,7 @@ JSP部署在服务器上，用于响应客户端发送的请求，并根据请�
     将相关java类库引入到jsp文件中   
     标志`<%@ import="..." %>`   
 
-    ```html
+    ```java
     <%--java包引入语句块--%>
     <%@ page import="java.util.*" %>
     <%@ page import="java.text.*" %>
