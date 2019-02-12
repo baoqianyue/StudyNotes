@@ -65,7 +65,11 @@ request对象是`HttpServletRequest`类的实例
 ```java
 //通过一个元素的name属性获得该元素的value
 request.getParameter(String name);
-``` 
+```   
+
+* request作用域   
+
+    request作用域在相邻两个web资源之间共享同一个request**请求对象**时使用   
 
 #### response对象    
 
@@ -76,8 +80,84 @@ response对象是`HttpSerlvetResponse`类的实例
 ```java
 //返回响应使用的字符编码集
 String getCharacterEncoding();
+```  
+
+#### page对象   
+
+代表正在运行的由JSP文件产生的类对象,指向当前JSP页面本身，类似于类中的this指针   
+
+获取当前JSP页面对应的servlet实例的信息   
+
+```java
+page.getServletInfo();    
 ```
 
+#### pageContext对象    
+
+pageContext对象提供了获取其他内置对象的方法，还有转发请求到其他web资源的功能    
+
+* 请求转发功能   
+
+    ```java
+    //将当前页面重导到其他页面
+    pageContext.forward(String relativeUrlPath);   
+    ```  
+
+* 动态引入界面  
+
+    ```java
+    //在当前位置包含另一个文件
+    pageContext.include(String relativeUrlPath);
+    ```  
+
+#### session对象    
+
+session是指客户端与服务器的一次会话，此间所有的交互内容都会被记录在session对象中，是`HttpSession`类的实例   
+
+* 相关信息的存取   
+
+    ```java
+    # 存数据 
+    session.setAttribute(String s, Object o);
+    # 取数据
+    session.getAttribute(String s);
+    ```  
+
+* session有效时间   
+
+    ```java
+    session.setMaxInactiveInterval(int second); 
+    ```    
+
+#### exception对象   
+
+当一个JSP页面在运行时出现了异常，这时就会产生一个exception对象    
+
+如果希望在另一个页面中进行异常的处理，就在指定错误处理页面    
+
+```java
+<%@ page contentType="text/html;charset=UTF-8" errorPage="error.jsp" language="java" %>
+```   
+这样当当前界面发生异常时会自动跳转到`error.jsp`页面进行错误处理   
+
+错误处理页面也需要进行设定    
+
+```java
+<%@ page contentType="text/html;charset=UTF-8" language="java" isErrorPage="true" %>
+```
+
+#### application对象   
+
+application对象实现了不同用户之间的信息共享，存放全局变量，该对象的生命周期为从服务器启动到服务器关闭，在此期间，该对象一直存在，这样在用户的前后连接或者不同用户之间的连接中，都可以对该对象的同一属性进行操作和访问    
+
+是`ServletContext`的实例   
+
+属性值的存取   
+
+```java
+application.setAttribute(String name, Object o);
+application.getAttribute(String name); 
+```
 
 
 
