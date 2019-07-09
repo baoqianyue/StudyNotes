@@ -42,4 +42,10 @@ remote_port = 6000
 得到进程号为3600    
 
 关闭：   
-`kill -9 3600`    
+`kill -9 3600`     
+
+### 参考       
+[在win10上将frp客户端服务注册为系统service](https://www.jianshu.com/p/a6e9627dbe29)    
+
+
+ 
